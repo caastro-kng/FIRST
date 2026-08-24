@@ -22,6 +22,12 @@
     color: #111827;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  #root {
+    min-width: 0;
+    overflow-x: clip;
   }
 
   code, kbd, samp, pre, .font-mono {
@@ -29,7 +35,7 @@
   }
 
   section, [id] {
-    scroll-margin-top: 88px;
+    scroll-margin-top: 78px;
   }
 
   @media (min-width: 1024px) {
@@ -40,6 +46,11 @@
 
   a, button {
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  img, video, svg {
+    max-width: 100%;
   }
 
   :focus-visible {
@@ -109,6 +120,114 @@ img {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #0066B3;
+}
+
+@media (max-width: 639px) {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    overflow-x: clip;
+  }
+
+  section {
+    contain: paint;
+  }
+
+  #sobre,
+  #sesi-senai,
+  #valores,
+  #como-funciona,
+  #ligas,
+  #comparativo,
+  #jornada,
+  #temporada,
+  #experiencia {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+
+  #sobre h2,
+  #sesi-senai h2,
+  #valores h2,
+  #como-funciona h2,
+  #ligas h2,
+  #comparativo h2,
+  #jornada h2,
+  #temporada h2,
+  #experiencia h2 {
+    font-size: clamp(2.05rem, 10.2vw, 2.7rem) !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.035em !important;
+    overflow-wrap: anywhere;
+  }
+
+  #ligas [role="tablist"] button {
+    min-width: 0;
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+  }
+
+  #ligas [role="region"] > div {
+    border-radius: 1.25rem !important;
+  }
+
+  #ligas [role="region"] > div > div:first-child {
+    min-height: 300px !important;
+  }
+
+  #ligas [role="region"] > div > div:last-child {
+    padding: 1.25rem !important;
+  }
+
+  #comparativo button,
+  #jornada button,
+  #temporada button,
+  #valores button,
+  #como-funciona button {
+    max-width: 100%;
+  }
+
+  #comparativo p,
+  #jornada p,
+  #temporada p,
+  #valores p,
+  #como-funciona p,
+  #sesi-senai p,
+  #experiencia p {
+    overflow-wrap: anywhere;
+  }
+
+  #jornada img,
+  #temporada img,
+  #sesi-senai img,
+  #experiencia img {
+    object-position: center;
+  }
+
+  .btn-hover:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 380px) {
+  #sobre h2,
+  #sesi-senai h2,
+  #valores h2,
+  #como-funciona h2,
+  #ligas h2,
+  #comparativo h2,
+  #jornada h2,
+  #temporada h2,
+  #experiencia h2 {
+    font-size: 2rem !important;
+  }
+
+  #ligas [role="tablist"] button {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
