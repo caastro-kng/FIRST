@@ -1,6 +1,12 @@
 import React from 'react';
 import { BRAZIL_ECOSYSTEM_DATA } from '../data/firstData';
-import { School, Factory, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { School, Factory, ArrowRight, CheckCircle2, Users, MapPinned, Trophy } from 'lucide-react';
+
+const BRAZIL_STATS = [
+  { value: '600', label: 'competidores', detail: 'Festival SESI 2026', icon: Users },
+  { value: '48', label: 'equipes', detail: 'Festival SESI de Educação 2026', icon: Trophy },
+  { value: '19', label: 'UFs representadas', detail: 'alcance nacional', icon: MapPinned },
+];
 
 export const FirstBrazilSesiSenai: React.FC = () => {
   return (
@@ -22,7 +28,7 @@ export const FirstBrazilSesiSenai: React.FC = () => {
           </p>
         </div>
 
-        <div className="mb-10 overflow-hidden rounded-3xl bg-gray-950 text-white">
+        <div className="mb-6 overflow-hidden rounded-3xl bg-gray-950 text-white">
           <div className="grid grid-cols-1 lg:grid-cols-12">
             <div className="p-8 sm:p-10 lg:col-span-7 lg:p-12">
               <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-blue-300">ECOSSISTEMA BRASILEIRO</div>
@@ -46,6 +52,24 @@ export const FirstBrazilSesiSenai: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="mb-12 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {BRAZIL_STATS.map((stat) => {
+            const Icon = stat.icon;
+            return (
+              <div key={stat.label} className="rounded-2xl border border-gray-200 bg-[#FAFAFA] p-5 sm:p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-3xl font-black tracking-[-0.04em] text-gray-950">{stat.value}</div>
+                    <div className="mt-1 text-xs font-bold uppercase tracking-wide text-gray-800">{stat.label}</div>
+                  </div>
+                  <div className="rounded-xl bg-blue-50 p-2 text-[#0066B3]"><Icon className="h-4 w-4" /></div>
+                </div>
+                <div className="mt-4 text-[10px] font-mono uppercase tracking-wider text-gray-400">{stat.detail}</div>
+              </div>
+            );
+          })}
         </div>
 
         <div className="mb-12">
@@ -101,6 +125,10 @@ export const FirstBrazilSesiSenai: React.FC = () => {
               ))}
             </div>
           </div>
+        </div>
+
+        <div className="mt-5 text-[10px] font-mono uppercase tracking-wider text-gray-400">
+          Dados de participação: Festival SESI de Educação 2026 • SESI / Sistema Indústria.
         </div>
       </div>
     </section>
