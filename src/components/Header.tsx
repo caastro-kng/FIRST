@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { ArrowRight, BookOpen, Menu, X } from 'lucide-react';
 import { FirstLogo, SenaiLogo } from './OfficialLogos';
 
 interface HeaderProps {
@@ -10,12 +10,12 @@ interface HeaderProps {
 const NAV_LINKS = [
   { label: 'Sobre', href: '#sobre', id: 'sobre' },
   { label: 'Ligas', href: '#ligas', id: 'ligas' },
-  { label: 'Brasil', href: '#sesi-senai', id: 'sesi-senai' },
   { label: 'Jornada', href: '#jornada', id: 'jornada' },
   { label: 'Temporada', href: '#temporada', id: 'temporada' },
+  { label: 'Brasil', href: '#sesi-senai', id: 'sesi-senai' },
 ];
 
-export const Header: React.FC<HeaderProps> = () => {
+export const Header: React.FC<HeaderProps> = ({ onOpenGlossary }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -91,7 +91,17 @@ export const Header: React.FC<HeaderProps> = () => {
             })}
           </nav>
 
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-2">
+            {onOpenGlossary && (
+              <button
+                type="button"
+                onClick={onOpenGlossary}
+                className="btn-hover inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.1em] text-gray-700 hover:border-gray-300 hover:text-gray-950"
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                Glossário
+              </button>
+            )}
             <a
               href="#ligas"
               className="btn-hover inline-flex items-center gap-2 rounded-full bg-gray-950 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.11em] text-white hover:bg-[#0066B3]"
@@ -132,10 +142,24 @@ export const Header: React.FC<HeaderProps> = () => {
               ))}
             </nav>
 
+            {onOpenGlossary && (
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenGlossary();
+                }}
+                className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-3 text-xs font-bold uppercase tracking-wider text-gray-800"
+              >
+                <BookOpen className="w-4 h-4" />
+                Abrir glossário
+              </button>
+            )}
+
             <a
               href="#ligas"
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#0066B3] px-4 py-3 text-xs font-bold uppercase tracking-wider text-white"
+              className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#0066B3] px-4 py-3 text-xs font-bold uppercase tracking-wider text-white"
             >
               Explorar as ligas
               <ArrowRight className="w-4 h-4" />
