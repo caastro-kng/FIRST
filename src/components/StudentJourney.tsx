@@ -3,19 +3,20 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { STUDENT_JOURNEY_STAGES } from '../data/firstData';
 import { ArrowRight, GraduationCap, Sparkles, TrendingUp } from 'lucide-react';
 
-// Stable official FIRST press/impact imagery for each stage of the student journey.
+const FALLBACK_IMAGE = 'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg';
+
 const JOURNEY_IMAGES = [
   'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0319.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0446_1.jpg?width=1200',
   'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0125_1.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0125_1.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/frc_crowd_1jc2110_1.jpg?width=1400',
+  FALLBACK_IMAGE,
 ];
 
 const JOURNEY_IMAGE_ALTS = [
   'Estudantes participando de uma experiência FIRST LEGO League.',
-  'Estudantes desenvolvendo engenharia aplicada em uma equipe FIRST Tech Challenge.',
-  'Equipe FIRST Robotics Competition trabalhando com um robô de escala industrial.',
-  'Estudantes da comunidade FIRST em uma experiência avançada de engenharia e preparação para universidade e carreira.',
+  'Estudantes desenvolvendo engenharia aplicada nos bastidores de uma competição FIRST.',
+  'Arena de FIRST Robotics Competition com equipes, robôs de grande porte e público.',
+  'Grande evento FIRST reunindo estudantes, equipes e comunidade STEM.',
 ];
 
 export const StudentJourney: React.FC = () => {
@@ -23,6 +24,13 @@ export const StudentJourney: React.FC = () => {
   const reduceMotion = useReducedMotion();
   const stage = STUDENT_JOURNEY_STAGES[currentStage];
   const stageName = stage.stage.split('.')[1]?.trim() || stage.stage;
+
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const image = event.currentTarget;
+    if (!image.src.includes('first-blog_community_cmpupdates2-024.jpg')) {
+      image.src = FALLBACK_IMAGE;
+    }
+  };
 
   return (
     <section id="jornada" className="relative overflow-hidden bg-white py-24 lg:py-32 border-b border-gray-200">
@@ -86,12 +94,13 @@ export const StudentJourney: React.FC = () => {
               >
                 <div className="relative h-[300px] sm:h-[350px] lg:h-[380px] overflow-hidden bg-gray-900">
                   <img
-                    src={JOURNEY_IMAGES[currentStage] || JOURNEY_IMAGES[0]}
+                    src={JOURNEY_IMAGES[currentStage] || FALLBACK_IMAGE}
                     alt={JOURNEY_IMAGE_ALTS[currentStage] || JOURNEY_IMAGE_ALTS[0]}
                     className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"
                     fetchPriority="low"
+                    onError={handleImageError}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent" />
 
