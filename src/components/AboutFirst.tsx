@@ -1,124 +1,89 @@
 import React from 'react';
-import { CheckCircle2, Shield } from 'lucide-react';
+import { CheckCircle2, Shield, Sparkles } from 'lucide-react';
 import { FIRST_HISTORY, PHILOSOPHY_CONCEPTS } from '../data/firstData';
 
 export const AboutFirst: React.FC = () => {
   return (
-    <section id="sobre" className="py-24 lg:py-32 bg-white border-b border-gray-200 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#0066B3]">
-            <span className="w-1.5 h-1.5 bg-[#0066B3] rounded-full" />
-            <span>01 / ORIGEM, MISSÃO & FILOSOFIA</span>
+    <section id="sobre" className="relative border-b border-gray-200 bg-white py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-14 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="space-y-4 lg:col-span-8">
+            <div className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#0066B3]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#0066B3]" />
+              01 / POR QUE A FIRST EXISTE
+            </div>
+            <h2 className="text-4xl font-black uppercase leading-[0.98] tracking-[-0.035em] text-gray-950 sm:text-5xl lg:text-6xl">
+              TRANSFORMAR A CULTURA<br />
+              ATRAVÉS DA <span className="text-[#0066B3]">ENGENHARIA.</span>
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-950 tracking-tight uppercase leading-[1.08]">
-            ONDE ENGENHARIA <br />
-            ENCONTRA O <span className="text-[#0066B3]">FUTURO.</span>
-          </h2>
-          <p className="text-base sm:text-lg text-gray-600 font-normal leading-relaxed">
-            Mais do que construir máquinas, a FIRST foi concebida para transformar a cultura global: 
-            onde jovens cientistas, programadores e líderes são celebrados com o mesmo entusiasmo 
-            dedicado a atletas de elite.
-          </p>
+          <div className="lg:col-span-4">
+            <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
+              A FIRST usa robôs como ferramenta. O objetivo maior é formar jovens capazes de criar, colaborar, liderar e resolver problemas reais.
+            </p>
+          </div>
         </div>
 
-        {/* Storytelling Grid: Historical Origin & Impact */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          {/* Main Story (Left 7 Cols) */}
-          <div className="lg:col-span-7 p-8 sm:p-10 bg-[#FBFBFB] border border-gray-200/80 rounded-2xl space-y-6">
-            
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-gray-500 font-bold">
-                O SIGNIFICADO DA SIGLA
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black text-gray-950 uppercase tracking-tight">
-                {FIRST_HISTORY.acronymMeaning}
-              </h3>
-              <p className="text-xs text-gray-600 font-medium italic">
-                "{FIRST_HISTORY.ptTranslation}"
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+          <div className="relative overflow-hidden rounded-3xl bg-[#F5F7FA] p-8 sm:p-10 lg:col-span-7">
+            <div className="absolute right-6 top-4 text-[72px] font-black leading-none text-gray-200 sm:text-[110px]">1989</div>
+            <div className="relative z-10 max-w-2xl space-y-6">
+              <div className="space-y-2">
+                <div className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-gray-500">A ORIGEM</div>
+                <h3 className="text-2xl font-black uppercase tracking-tight text-gray-950 sm:text-3xl">
+                  {FIRST_HISTORY.acronymMeaning}
+                </h3>
+                <p className="text-xs font-medium italic text-gray-500">{FIRST_HISTORY.ptTranslation}</p>
+              </div>
+
+              <p className="text-sm leading-relaxed text-gray-700 sm:text-base">
+                Criada por <strong>Dean Kamen</strong> com a colaboração do <strong>Dr. Woodie Flowers</strong>, a FIRST nasceu para fazer ciência e tecnologia ocuparem, na cultura jovem, o mesmo espaço de prestígio que esporte e entretenimento.
               </p>
-            </div>
 
-            <p className="text-sm text-gray-700 leading-relaxed">
-              Fundada em <strong className="text-gray-950 font-bold">{FIRST_HISTORY.foundedYear}</strong> pelo renomado inventor e empreendedor <strong>Dean Kamen</strong> (criador do Segway e de bombas de infusão médicas) juntamente com o <strong>Dr. Woodie Flowers</strong> (professor emérito de engenharia mecânica do MIT), a FIRST nasceu para responder a um desafio educacional global:
-            </p>
-
-            <blockquote className="border-l-4 border-[#0066B3] pl-4 py-2 bg-blue-50/60 rounded-r-lg">
-              <p className="text-sm font-semibold text-gray-900 italic leading-snug">
+              <blockquote className="border-l-4 border-[#0066B3] pl-5 text-lg font-bold leading-snug text-gray-950 sm:text-xl">
                 {FIRST_HISTORY.vision}
-              </p>
-              <footer className="text-[10px] font-mono text-gray-500 mt-2 uppercase tracking-wider">
-                — Dean Kamen, Fundador da FIRST
-              </footer>
-            </blockquote>
+              </blockquote>
 
-            <p className="text-sm text-gray-700 leading-relaxed">
-              A metodologia fundamenta-se no <strong>STEAM</strong> (Science, Technology, Engineering, Arts, and Math), combinando o rigor do design com o desenvolvimento socioemocional e ético.
-            </p>
-
-            {/* Quick Fact Points */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-4 rounded-xl border border-gray-200/80 bg-white space-y-1 shadow-2xs">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#0066B3]" />
-                  <h4 className="text-xs font-bold text-gray-900 uppercase">Mentoria de Ponta</h4>
-                </div>
-                <p className="text-xs text-gray-600 leading-relaxed">Engenheiros voluntários e professores atuam ombro a ombro com alunos.</p>
-              </div>
-
-              <div className="p-4 rounded-xl border border-gray-200/80 bg-white space-y-1 shadow-2xs">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#ED1C24]" />
-                  <h4 className="text-xs font-bold text-gray-900 uppercase">Bolsas Globais</h4>
-                </div>
-                <p className="text-xs text-gray-600 leading-relaxed">Centenas de universidades no mundo reservam bolsas para egressos FIRST.</p>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Pillars of Philosophy (Right 5 Cols) */}
-          <div className="lg:col-span-5 p-8 sm:p-10 bg-gray-950 text-white rounded-2xl flex flex-col justify-between space-y-6 shadow-xs">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between pb-3 border-b border-gray-800 text-[10px] font-mono">
-                <span className="text-blue-400 font-bold uppercase tracking-widest flex items-center gap-1.5">
-                  <Shield className="w-3.5 h-3.5" />
-                  VALORES ÉTICOS INEGOCIÁVEIS
-                </span>
-                <span className="text-gray-400">FIRST CORE</span>
-              </div>
-              
-              <div className="space-y-6">
-                {PHILOSOPHY_CONCEPTS.map((concept, idx) => (
-                  <div key={idx} className={idx > 0 ? 'pt-5 border-t border-gray-800' : ''}>
-                    <div className="flex items-baseline justify-between gap-2">
-                      <h4 className="text-base font-bold text-white tracking-tight uppercase">
-                        {concept.title}
-                      </h4>
-                      <span className="text-[10px] font-mono text-gray-400 uppercase">{concept.subtitle}</span>
-                    </div>
-                    <p className="text-xs text-gray-300 leading-relaxed mt-2 font-normal">
-                      {concept.description}
-                    </p>
-                    <div className="mt-3 p-3 bg-white/5 rounded-lg border border-white/10 text-xs text-gray-300 font-mono">
-                      <strong className="text-emerald-400 font-semibold">Exemplo real: </strong>
-                      {concept.highlight}
-                    </div>
+              <div className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
+                <div className="rounded-2xl border border-gray-200 bg-white p-4">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase text-gray-950">
+                    <CheckCircle2 className="h-4 w-4 text-[#0066B3]" /> Mentoria
                   </div>
-                ))}
+                  <p className="mt-2 text-xs leading-relaxed text-gray-600">Professores, técnicos e profissionais apoiam alunos no processo de engenharia.</p>
+                </div>
+                <div className="rounded-2xl border border-gray-200 bg-white p-4">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase text-gray-950">
+                    <Sparkles className="h-4 w-4 text-[#ED1C24]" /> Protagonismo
+                  </div>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-600">O estudante participa das decisões, da construção, da comunicação e da estratégia.</p>
+                </div>
               </div>
-            </div>
-
-            <div className="pt-3 border-t border-gray-800 text-[10px] font-mono text-gray-400 uppercase text-right">
-              RESPONSABILIDADE SOCIAL • RIGOR ÉTICO
             </div>
           </div>
 
-        </div>
+          <div className="rounded-3xl bg-gray-950 p-8 text-white sm:p-10 lg:col-span-5">
+            <div className="mb-8 flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-400">
+                <Shield className="h-4 w-4" /> CULTURA FIRST
+              </div>
+              <span className="text-[10px] font-mono text-white/35">CORE</span>
+            </div>
 
+            <div className="space-y-8">
+              {PHILOSOPHY_CONCEPTS.map((concept, idx) => (
+                <div key={idx} className={idx > 0 ? 'border-t border-white/10 pt-7' : ''}>
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-white/35">0{idx + 1}</div>
+                  <h4 className="mt-2 text-xl font-black uppercase tracking-tight">{concept.title}</h4>
+                  <p className="mt-1 text-[11px] font-mono uppercase tracking-wider text-blue-300">{concept.subtitle}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-300">{concept.description}</p>
+                  <div className="mt-4 border-l-2 border-emerald-400 pl-3 text-xs leading-relaxed text-gray-400">
+                    {concept.highlight}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
