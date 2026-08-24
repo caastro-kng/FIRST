@@ -5,18 +5,22 @@ import { BookOpen, Search, X, RotateCcw } from 'lucide-react';
 interface GlossaryModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialSearch?: string;
 }
 
 const CATEGORIES = ['Todas', 'Arena', 'Hardware', 'Software', 'Estratégia', 'Cultura FIRST'];
 
-export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose, initialSearch = '' }) => {
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [activeCategory, setActiveCategory] = useState<string>('Todas');
   const titleId = useId();
   const searchId = useId();
 
   useEffect(() => {
     if (!isOpen) return;
+
+    setSearchTerm(initialSearch);
+    setActiveCategory('Todas');
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose();
@@ -30,7 +34,7 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, initialSearch]);
 
   const categoryCounts = useMemo(() => {
     return CATEGORIES.reduce<Record<string, number>>((acc, category) => {
@@ -80,12 +84,7 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
               <h2 id={titleId} className="text-lg sm:text-xl font-black text-gray-950 uppercase tracking-tight">Glossário Técnico FIRST</h2>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors shrink-0"
-            aria-label="Fechar glossário técnico"
-          >
+          <button type="button" onClick={onClose} className="p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors shrink-0" aria-label="Fechar glossário técnico">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -112,11 +111,7 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
                 key={category}
                 onClick={() => setActiveCategory(category)}
                 aria-pressed={activeCategory === category}
-                className={`px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider rounded-lg transition-colors border ${
-                  activeCategory === category
-                    ? 'bg-gray-950 text-white border-gray-950'
-                    : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border-gray-200'
-                }`}
+                className={`px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider rounded-lg transition-colors border ${activeCategory === category ? 'bg-gray-950 text-white border-gray-950' : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border-gray-200'}`}
               >
                 {category} <span className={activeCategory === category ? 'text-white/50' : 'text-gray-400'}>{categoryCounts[category]}</span>
               </button>
@@ -134,21 +129,15 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
                 </div>
                 <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">{item.definition}</p>
                 <div className="p-3 bg-gray-50 border border-gray-200/80 rounded-xl text-xs text-gray-700 font-mono">
-                  <strong className="text-[#0066B3] uppercase">Exemplo prático: </strong>
-                  <span>{item.example}</span>
+                  <strong className="text-[#0066B3] uppercase">Exemplo prático: </strong><span>{item.example}</span>
                 </div>
               </article>
             ))
           ) : (
             <div className="text-center py-12">
               <div className="text-gray-500 text-xs font-mono mb-4">Nenhum termo encontrado para “{searchTerm}”.</div>
-              <button
-                type="button"
-                onClick={clearFilters}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-700 hover:bg-gray-100"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                Limpar filtros
+              <button type="button" onClick={clearFilters} className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-700 hover:bg-gray-100">
+                <RotateCcw className="w-3.5 h-3.5" />Limpar filtros
               </button>
             </div>
           )}
@@ -158,22 +147,11 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
           <span>{filteredTerms.length} DE {GLOSSARY_TERMS.length} TERMOS</span>
           <div className="flex items-center gap-2">
             {hasFilters && (
-              <button
-                type="button"
-                onClick={clearFilters}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-600 hover:text-gray-950 transition-colors"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                Limpar
+              <button type="button" onClick={clearFilters} className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-600 hover:text-gray-950 transition-colors">
+                <RotateCcw className="w-3.5 h-3.5" />Limpar
               </button>
             )}
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors shadow-2xs"
-            >
-              Fechar glossário
-            </button>
+            <button type="button" onClick={onClose} className="px-4 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors shadow-2xs">Fechar glossário</button>
           </div>
         </div>
       </div>
