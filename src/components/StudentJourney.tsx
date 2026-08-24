@@ -3,19 +3,19 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { STUDENT_JOURNEY_STAGES } from '../data/firstData';
 import { ArrowRight, GraduationCap, Sparkles, TrendingUp } from 'lucide-react';
 
-// Official FIRST imagery selected to make each stage feel connected to the real program.
+// Stable official FIRST press/impact imagery for each stage of the student journey.
 const JOURNEY_IMAGES = [
-  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0312.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230419_bm_0707.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230422_bm_1882.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230422_bm_2231.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0319.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0446_1.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0125_1.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0125_1.jpg?width=1200',
 ];
 
 const JOURNEY_IMAGE_ALTS = [
-  'Estudantes participando de uma experiência FIRST LEGO League em competição.',
-  'Estudantes trabalhando juntos durante uma competição FIRST Tech Challenge.',
-  'Equipe e robô de grande porte durante uma experiência FIRST Robotics Competition.',
-  'Comunidade FIRST reunida em um grande evento de robótica e STEM.',
+  'Estudantes participando de uma experiência FIRST LEGO League.',
+  'Estudantes desenvolvendo engenharia aplicada em uma equipe FIRST Tech Challenge.',
+  'Equipe FIRST Robotics Competition trabalhando com um robô de escala industrial.',
+  'Estudantes da comunidade FIRST em uma experiência avançada de engenharia e preparação para universidade e carreira.',
 ];
 
 export const StudentJourney: React.FC = () => {
@@ -84,15 +84,14 @@ export const StudentJourney: React.FC = () => {
                 transition={{ duration: reduceMotion ? 0 : 0.22 }}
                 className="h-full"
               >
-                <div className="relative h-[300px] sm:h-[350px] lg:h-[380px] overflow-hidden">
+                <div className="relative h-[300px] sm:h-[350px] lg:h-[380px] overflow-hidden bg-gray-900">
                   <img
-                    src={JOURNEY_IMAGES[currentStage]}
-                    alt={JOURNEY_IMAGE_ALTS[currentStage]}
+                    src={JOURNEY_IMAGES[currentStage] || JOURNEY_IMAGES[0]}
+                    alt={JOURNEY_IMAGE_ALTS[currentStage] || JOURNEY_IMAGE_ALTS[0]}
                     className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"
                     fetchPriority="low"
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent" />
 
