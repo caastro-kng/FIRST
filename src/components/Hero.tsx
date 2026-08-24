@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ArrowUpRight, Sparkles, Trophy, Cpu, Users } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, PlayCircle } from 'lucide-react';
 
 interface HeroProps {
   onOpenQuiz: () => void;
@@ -8,166 +8,92 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuiz }) => {
   return (
-    <section id="inicio" className="pt-28 pb-16 lg:pt-36 lg:pb-24 bg-[#FBFBFB] relative overflow-hidden">
-      
-      {/* Subtle strategic grid accent in the background */}
-      <div className="absolute inset-0 bg-grid-subtle opacity-70 pointer-events-none" />
+    <section id="inicio" className="relative overflow-hidden bg-gray-950 pt-24 lg:pt-28">
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1800&q=90"
+          alt="Robótica competitiva em ambiente de arena"
+          className="h-full w-full object-cover opacity-45"
+          referrerPolicy="no-referrer"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/88 to-gray-950/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-gray-950/30" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Main Editorial Hero Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* Left Column: Typography & Storytelling */}
-          <div className="lg:col-span-7 space-y-6">
-            
-            {/* Editorial Eyebrow */}
-            <div className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest text-[#0066B3] uppercase">
-              <span className="w-2 h-2 rounded-full bg-[#ED1C24] animate-pulse" />
-              <span>O MAIOR ECOSSISTEMA GLOBAL DE ROBÓTICA</span>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8 lg:pb-20">
+        <div className="grid min-h-[640px] grid-cols-1 items-end gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="space-y-7 pt-16 lg:col-span-8 lg:pt-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-white/80 backdrop-blur-md">
+              <span className="h-2 w-2 rounded-full bg-[#ED1C24]" />
+              FIRST • CIÊNCIA, ENGENHARIA E COMPETIÇÃO
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-950 tracking-tight leading-[1.05] uppercase">
-              MUITO MAIS QUE <span className="text-[#0066B3]">ROBÔS.</span>
-            </h1>
+            <div className="space-y-4">
+              <h1 className="max-w-5xl text-5xl font-black uppercase leading-[0.94] tracking-[-0.045em] text-white sm:text-6xl lg:text-8xl">
+                NÃO É SÓ <span className="text-[#58AEEA]">ROBÓTICA.</span><br />
+                É <span className="text-[#ED1C24]">ARENA.</span>
+              </h1>
 
-            {/* Editorial Narrative */}
-            <p className="text-base sm:text-lg text-gray-600 font-normal leading-relaxed max-w-2xl">
-              A <strong>FIRST</strong> não constrói máquinas para ganhar torneios. Construímos robôs 
-              para transformar pessoas. Estudantes projetam, usinam e programam robôs de nível industrial 
-              enquanto desenvolvem liderança, cooperação radical e soluções reais para a sociedade.
-            </p>
+              <p className="max-w-2xl text-base leading-relaxed text-gray-300 sm:text-lg">
+                Jovens projetam, constroem e programam máquinas para competir — enquanto aprendem liderança, estratégia, comunicação e engenharia de verdade.
+              </p>
+            </div>
 
-            {/* Action Buttons (Refined border-radius, clean hierarchy, smooth motion) */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center gap-3">
               <a
                 href="#ligas"
                 id="hero-cta-explore-leagues"
-                className="btn-hover inline-flex items-center gap-2.5 px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white bg-[#0066B3] hover:bg-[#005291] rounded-lg shadow-xs hover:shadow-md"
+                className="btn-hover inline-flex items-center gap-2.5 rounded-lg bg-[#0066B3] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#005291]"
               >
-                <span>Explorar as 3 Ligas</span>
-                <ArrowRight className="w-4 h-4" />
+                Explorar as ligas
+                <ArrowRight className="h-4 w-4" />
               </a>
 
               <a
                 href="#sobre"
                 id="hero-cta-about-first"
-                className="btn-hover inline-flex items-center gap-2 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-gray-800 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg"
+                className="btn-hover inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-md hover:bg-white/15"
               >
-                <span>Conhecer a FIRST</span>
-                <ArrowUpRight className="w-4 h-4 text-gray-500" />
+                Entender a FIRST
+                <ArrowUpRight className="h-4 w-4" />
               </a>
 
               <button
                 onClick={onOpenQuiz}
                 id="hero-quiz-link"
-                className="btn-hover inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0066B3] hover:text-[#005291] py-2 px-1 group"
+                className="btn-hover inline-flex items-center gap-2 px-2 py-3 text-xs font-bold uppercase tracking-wider text-white/80 hover:text-white"
               >
-                <span>Descobrir minha liga ideal</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
+                <PlayCircle className="h-4 w-4" />
+                Qual liga combina comigo?
               </button>
             </div>
-
           </div>
 
-          {/* Right Column: Hero Visual with Light Telemetry Overlay */}
-          <div className="lg:col-span-5">
-            <div className="relative rounded-xl overflow-hidden shadow-xl border border-gray-200/80 bg-gray-900 group">
-              
-              {/* Competition Photography */}
-              <img
-                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80"
-                alt="Equipe de robótica FIRST ajustando robô industrial na arena"
-                className="w-full h-[380px] sm:h-[440px] object-cover transition-transform duration-700 group-hover:scale-105"
-                referrerPolicy="no-referrer"
-              />
-
-              {/* Gradient Scrim */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-              {/* Top Telemetry Badges */}
-              <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[10px] font-mono text-white/90">
-                <div className="flex items-center gap-2 px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full border border-white/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#ED1C24] animate-ping" />
-                  <span className="font-bold tracking-wider uppercase">ARENA OFICIAL</span>
-                </div>
-                <div className="px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full border border-white/20 tracking-wider uppercase">
-                  STEM • BRASIL
-                </div>
+          <div className="lg:col-span-4 lg:self-end lg:pb-8">
+            <div className="grid grid-cols-3 overflow-hidden rounded-2xl border border-white/15 bg-black/35 backdrop-blur-xl lg:grid-cols-1">
+              <div className="border-r border-white/10 p-4 lg:border-b lg:border-r-0 lg:p-5">
+                <div className="text-[10px] font-mono uppercase tracking-widest text-white/45">Entrada</div>
+                <div className="mt-1 text-lg font-black text-[#FF8A3D]">FLL</div>
+                <div className="mt-1 text-[11px] text-white/60">LEGO + descoberta</div>
               </div>
-
-              {/* Bottom Caption & Quote */}
-              <div className="absolute bottom-4 left-4 right-4 p-4 bg-black/70 backdrop-blur-md rounded-lg border border-white/10 text-white space-y-1">
-                <div className="text-[10px] font-mono text-blue-400 font-bold uppercase tracking-wider">
-                  FILOSOFIA DO FUNDADOR
-                </div>
-                <p className="text-xs italic text-gray-200 leading-snug">
-                  "Você tem adolescentes que nunca jogaram futebol no time da escola, mas agora constroem robôs de 55 kg e recebem bolsas universitárias."
-                </p>
-                <div className="text-[10px] font-mono text-gray-400 text-right">
-                  — Dean Kamen, Fundador da FIRST
-                </div>
+              <div className="border-r border-white/10 p-4 lg:border-b lg:border-r-0 lg:p-5">
+                <div className="text-[10px] font-mono uppercase tracking-widest text-white/45">Evolução</div>
+                <div className="mt-1 text-lg font-black text-[#58AEEA]">FTC</div>
+                <div className="mt-1 text-[11px] text-white/60">Metal + software</div>
               </div>
-
+              <div className="p-4 lg:p-5">
+                <div className="text-[10px] font-mono uppercase tracking-widest text-white/45">Escala máxima</div>
+                <div className="mt-1 text-lg font-black text-[#FF4D52]">FRC</div>
+                <div className="mt-1 text-[11px] text-white/60">Indústria + arena</div>
+              </div>
             </div>
           </div>
-
         </div>
 
-        {/* Clean Open Metrics Row (No Heavy Enclosing Cards) */}
-        <div className="mt-16 pt-10 border-t border-gray-200 grid grid-cols-2 md:grid-cols-4 gap-8">
-          
-          <div className="space-y-1">
-            <div className="text-3xl sm:text-4xl font-black text-gray-950 tracking-tight font-mono">
-              +3.200
-            </div>
-            <div className="text-xs font-semibold text-gray-900 uppercase tracking-wide">
-              Equipes no Brasil
-            </div>
-            <p className="text-[11px] text-gray-500 font-medium">
-              Presentes em escolas públicas, privadas e unidades SESI/SENAI.
-            </p>
-          </div>
-
-          <div className="space-y-1">
-            <div className="text-3xl sm:text-4xl font-black text-[#0066B3] tracking-tight font-mono">
-              110+
-            </div>
-            <div className="text-xs font-semibold text-gray-900 uppercase tracking-wide">
-              Países no Mundo
-            </div>
-            <p className="text-[11px] text-gray-500 font-medium">
-              Comunidade internacional unida pela ciência e engenharia.
-            </p>
-          </div>
-
-          <div className="space-y-1">
-            <div className="text-3xl sm:text-4xl font-black text-[#ED1C24] tracking-tight font-mono">
-              3
-            </div>
-            <div className="text-xs font-semibold text-gray-900 uppercase tracking-wide">
-              Ligas Integradas
-            </div>
-            <p className="text-[11px] text-gray-500 font-medium">
-              Progressão contínua: FLL (básico), FTC (médio) e FRC (avançado).
-            </p>
-          </div>
-
-          <div className="space-y-1">
-            <div className="text-3xl sm:text-4xl font-black text-gray-950 tracking-tight font-mono">
-              100%
-            </div>
-            <div className="text-xs font-semibold text-gray-900 uppercase tracking-wide">
-              Foco no Humano
-            </div>
-            <p className="text-[11px] text-gray-500 font-medium">
-              Gracious Professionalism e Coopertição em cada torneio.
-            </p>
-          </div>
-
+        <div className="flex flex-col gap-3 border-t border-white/10 pt-5 text-[10px] font-mono uppercase tracking-[0.16em] text-white/45 sm:flex-row sm:items-center sm:justify-between">
+          <span>DO PRIMEIRO SENSOR À ARENA DE GRANDE ESCALA</span>
+          <span>ROLE PARA EXPLORAR ↓</span>
         </div>
-
       </div>
     </section>
   );
