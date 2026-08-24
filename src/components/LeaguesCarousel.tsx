@@ -16,15 +16,16 @@ const LEAGUES_CONFIG = [
     headlinePrefix: 'DA IDEIA AO',
     headlineHighlight: 'PRIMEIRO ROBÔ.',
     intro: 'LEGO, criatividade e método científico em uma porta de entrada acessível para o universo da engenharia.',
+    detail: 'Na divisão Challenge, equipes programam um robô LEGO® Education SPIKE™ Prime para cumprir missões autônomas em partidas de 2 minutos e 30 segundos, além de desenvolver um Projeto de Inovação.',
     accentColor: '#FF5F00',
     accentSoft: '#FFF3E8',
     accentText: '#9A3A00',
     progression: 'LEGO',
     icon: Layers3,
     specs: [
-      { label: 'Robô', value: '~1,5 kg' },
+      { label: 'Equipe', value: '2–10 jovens' },
       { label: 'Controle', value: 'Autônomo' },
-      { label: 'Código', value: 'Scratch / Python' },
+      { label: 'Plataforma', value: 'SPIKE Prime' },
       { label: 'Round', value: '2m30s' },
     ],
     focus: [
@@ -43,15 +44,16 @@ const LEAGUES_CONFIG = [
     headlinePrefix: 'QUANDO O PROJETO',
     headlineHighlight: 'VIRA MÁQUINA.',
     intro: 'Metal, eletrônica e software entram em cena para transformar conceitos de engenharia em desempenho real de arena.',
+    detail: 'Robôs começam contidos em um cubo de 18 pol. (45,7 cm) e competem em alianças 2 contra 2. No manual 2025–2026, não existe limite oficial de peso para o robô.',
     accentColor: '#0066B3',
     accentSoft: '#EAF5FF',
     accentText: '#004D87',
     progression: 'METAL',
     icon: Cpu,
     specs: [
-      { label: 'Robô', value: 'Até 19 kg' },
-      { label: 'Controle', value: '2 gamepads' },
-      { label: 'Código', value: 'Java' },
+      { label: 'Peso', value: 'Sem limite oficial' },
+      { label: 'Início', value: 'Cubo 45,7 cm' },
+      { label: 'Código', value: 'Java / Blocks' },
       { label: 'Arena', value: '2 × 2' },
     ],
     focus: [
@@ -70,16 +72,17 @@ const LEAGUES_CONFIG = [
     headlinePrefix: 'ENGENHARIA EM',
     headlineHighlight: 'ESCALA DE ARENA.',
     intro: 'Robôs industriais, alianças 3 contra 3 e uma atmosfera que aproxima engenharia, estratégia e esporte.',
+    detail: 'Pelas regras oficiais de 2026, o robô pode pesar até 115 lb (52,16 kg), sem contar bumpers e bateria, e inicia com perímetro máximo de 110 pol. e até 30 pol. de altura.',
     accentColor: '#ED1C24',
     accentSoft: '#FFF0F1',
     accentText: '#A20F15',
     progression: 'ARENA',
     icon: Trophy,
     specs: [
-      { label: 'Peso', value: '56,7 kg' },
-      { label: 'Potência', value: '+3.000 W' },
+      { label: 'Peso', value: 'Até 52,16 kg' },
+      { label: 'Aliança', value: '3 × 3' },
       { label: 'Código', value: 'WPILib' },
-      { label: 'Arena', value: '3 × 3' },
+      { label: 'Escala', value: 'Industrial' },
     ],
     focus: [
       'Swerve Drive 360°',
@@ -324,7 +327,7 @@ export const LeaguesCarousel: React.FC = () => {
                   </h3>
 
                   <p className="text-base text-gray-800 leading-relaxed font-medium mb-3">{activeConfig.intro}</p>
-                  <p className="text-sm text-gray-500 leading-relaxed">{activeData.description}</p>
+                  <p className="text-sm text-gray-500 leading-relaxed">{activeConfig.detail}</p>
                 </div>
 
                 <div>
