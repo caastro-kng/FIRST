@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = () => {
       setIsScrolled(window.scrollY > 16);
 
       const sectionIds = NAV_LINKS.map((link) => link.id);
-      const position = window.scrollY + 150;
+      const position = window.scrollY + 130;
       let current = '';
 
       sectionIds.forEach((id) => {
@@ -41,6 +41,15 @@ export const Header: React.FC<HeaderProps> = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const closeOnResize = () => {
+      if (window.innerWidth >= 1024) setMobileMenuOpen(false);
+    };
+    window.addEventListener('resize', closeOnResize);
+    return () => window.removeEventListener('resize', closeOnResize);
+  }, [mobileMenuOpen]);
+
   return (
     <header
       id="main-header"
@@ -50,16 +59,16 @@ export const Header: React.FC<HeaderProps> = () => {
           : 'bg-white/95 border-b border-gray-200/60'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-[68px]' : 'h-[76px]'}`}>
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
+        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-[62px] sm:h-[68px]' : 'h-[66px] sm:h-[76px]'}`}>
           <a
             href="#inicio"
-            className="flex items-center gap-3 sm:gap-4 shrink-0 group"
+            className="flex min-w-0 items-center gap-2.5 sm:gap-4 shrink group"
             aria-label="FIRST e SENAI — início"
           >
-            <FirstLogo className="h-7 sm:h-8 w-auto max-w-[122px] sm:max-w-[142px] transition-transform duration-300 group-hover:scale-[1.02]" />
-            <span className="h-6 w-px bg-gray-300" aria-hidden="true" />
-            <SenaiLogo className="h-5 sm:h-6 w-auto max-w-[86px] sm:max-w-[102px] transition-transform duration-300 group-hover:scale-[1.02]" />
+            <FirstLogo className="h-6.5 sm:h-8 w-auto max-w-[108px] sm:max-w-[142px] transition-transform duration-300 group-hover:scale-[1.02]" />
+            <span className="h-5 sm:h-6 w-px bg-gray-300 shrink-0" aria-hidden="true" />
+            <SenaiLogo className="h-4.5 sm:h-6 w-auto max-w-[72px] sm:max-w-[102px] transition-transform duration-300 group-hover:scale-[1.02]" />
           </a>
 
           <nav className="hidden lg:flex items-center gap-1 rounded-full border border-gray-200/80 bg-gray-50/80 p-1" aria-label="Navegação principal">
@@ -95,7 +104,7 @@ export const Header: React.FC<HeaderProps> = () => {
           <button
             type="button"
             onClick={() => setMobileMenuOpen((open) => !open)}
-            className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-900 shadow-sm"
+            className="lg:hidden inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-900 shadow-sm"
             aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
           >
@@ -105,15 +114,15 @@ export const Header: React.FC<HeaderProps> = () => {
       </div>
 
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-gray-200 bg-white/98 backdrop-blur-xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <div className="lg:hidden max-h-[calc(100dvh-62px)] overflow-y-auto overscroll-contain border-t border-gray-200 bg-white/98 backdrop-blur-xl">
+          <div className="max-w-7xl mx-auto px-3.5 sm:px-6 py-3.5 sm:py-4">
             <nav className="grid gap-1" aria-label="Navegação mobile">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.id}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-wider transition-colors ${
+                  className={`flex min-h-11 items-center justify-between rounded-xl px-4 py-2.5 text-[13px] font-bold uppercase tracking-wider transition-colors ${
                     activeSection === link.id ? 'bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -126,7 +135,7 @@ export const Header: React.FC<HeaderProps> = () => {
             <a
               href="#ligas"
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0066B3] px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-white"
+              className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#0066B3] px-4 py-3 text-xs font-bold uppercase tracking-wider text-white"
             >
               Explorar as ligas
               <ArrowRight className="w-4 h-4" />
