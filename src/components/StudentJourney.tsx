@@ -3,11 +3,19 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { STUDENT_JOURNEY_STAGES } from '../data/firstData';
 import { ArrowRight, GraduationCap, Sparkles, TrendingUp } from 'lucide-react';
 
+// Official FIRST imagery selected to make each stage feel connected to the real program.
 const JOURNEY_IMAGES = [
-  'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=72',
-  'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=72',
-  'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1000&q=72',
-  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=72',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0312.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230419_bm_0707.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230422_bm_1882.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230422_bm_2231.jpg?width=1200',
+];
+
+const JOURNEY_IMAGE_ALTS = [
+  'Estudantes participando de uma experiência FIRST LEGO League em competição.',
+  'Estudantes trabalhando juntos durante uma competição FIRST Tech Challenge.',
+  'Equipe e robô de grande porte durante uma experiência FIRST Robotics Competition.',
+  'Comunidade FIRST reunida em um grande evento de robótica e STEM.',
 ];
 
 export const StudentJourney: React.FC = () => {
@@ -79,7 +87,7 @@ export const StudentJourney: React.FC = () => {
                 <div className="relative h-[300px] sm:h-[350px] lg:h-[380px] overflow-hidden">
                   <img
                     src={JOURNEY_IMAGES[currentStage]}
-                    alt={stageName}
+                    alt={JOURNEY_IMAGE_ALTS[currentStage]}
                     className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"
