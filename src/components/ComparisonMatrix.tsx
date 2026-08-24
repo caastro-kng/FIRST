@@ -7,7 +7,7 @@ const LEAGUES = [
     key: 'fll' as const,
     name: 'FLL',
     fullName: 'FIRST LEGO League',
-    age: '9–16 anos',
+    age: '9–15 anos*',
     level: 'Entrada',
     headline: 'LEGO + CIÊNCIA',
     description: 'A porta de entrada para construir, programar e resolver problemas reais com criatividade.',
@@ -180,6 +180,10 @@ export const ComparisonMatrix: React.FC = () => {
             </div>
           ))}
         </div>
+
+        <p className="mt-4 text-[10px] font-mono uppercase tracking-wider text-gray-400">
+          * Faixa usada pelo programa operado pelo SESI no Brasil; idades da FIRST LEGO League podem variar por país e formato.
+        </p>
       </div>
     </section>
   );
