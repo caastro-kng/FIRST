@@ -3,14 +3,25 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { SEASON_STEPS } from '../data/firstData';
 import { ArrowRight, CheckCircle2, Clock3, Trophy, Leaf } from 'lucide-react';
 
+// Official FIRST imagery selected to illustrate the real rhythm of a season.
 const SEASON_IMAGES = [
-  'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=72',
-  'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=72',
-  'https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=1000&q=72',
-  'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=72',
-  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=72',
-  'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=72',
-  'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1000&q=72',
+  'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0312.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230419_bm_0707.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230422_bm_1882.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0312.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230422_bm_2231.jpg?width=1200',
+  'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg',
+];
+
+const SEASON_IMAGE_ALTS = [
+  'Grande evento FIRST representando o início da temporada e a revelação do desafio.',
+  'Estudantes e robô FIRST durante fase de prototipagem e desenvolvimento.',
+  'Equipe FIRST trabalhando diretamente na construção e integração do robô.',
+  'Estudantes em evento FIRST durante fase de programação, calibração e testes.',
+  'Equipe FIRST ajustando o robô antes de entrar em competição.',
+  'Comunidade FIRST reunida em um grande evento, representando treino, preparação e competição.',
+  'Arena lotada no FIRST Championship, clímax internacional da temporada.',
 ];
 
 const CURRENT_SEASON = [
@@ -110,8 +121,8 @@ export const SeasonTimeline: React.FC = () => {
                 <div className="relative rounded-[28px] overflow-hidden min-h-[320px] sm:min-h-[410px] border border-white/10 bg-black">
                   <img
                     src={SEASON_IMAGES[activeIndex] || SEASON_IMAGES[0]}
-                    alt={step.title}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    alt={SEASON_IMAGE_ALTS[activeIndex] || step.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-[1.015]"
                     loading="lazy"
                     decoding="async"
                     fetchPriority="low"
