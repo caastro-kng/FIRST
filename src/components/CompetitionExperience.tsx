@@ -1,110 +1,92 @@
 import React from 'react';
 import { COMPETITION_AREAS } from '../data/firstData';
-import { Wrench, Code, LineChart, Palette, Coins, Sparkles, Heart, ShieldAlert, Users, Award } from 'lucide-react';
+import { Wrench, Code, LineChart, Palette, Coins, Sparkles, Users, Award } from 'lucide-react';
 
 export const CompetitionExperience: React.FC = () => {
   const getAreaIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Wrench': return <Wrench className="w-5 h-5 text-[#0066B3]" />;
-      case 'Code': return <Code className="w-5 h-5 text-[#ED1C24]" />;
-      case 'LineChart': return <LineChart className="w-5 h-5 text-emerald-600" />;
-      case 'Palette': return <Palette className="w-5 h-5 text-purple-600" />;
-      case 'Coins': return <Coins className="w-5 h-5 text-amber-600" />;
-      case 'Sparkles': return <Sparkles className="w-5 h-5 text-blue-600" />;
-      default: return <Sparkles className="w-5 h-5 text-gray-700" />;
+      case 'Wrench': return <Wrench className="h-5 w-5" />;
+      case 'Code': return <Code className="h-5 w-5" />;
+      case 'LineChart': return <LineChart className="h-5 w-5" />;
+      case 'Palette': return <Palette className="h-5 w-5" />;
+      case 'Coins': return <Coins className="h-5 w-5" />;
+      default: return <Sparkles className="h-5 w-5" />;
     }
   };
 
   return (
-    <section id="experiencia" className="py-20 lg:py-28 bg-[#FAFAFA] border-b border-gray-200 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-14 space-y-3">
-          <div className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#0066B3]">
-            <span className="w-1.5 h-1.5 bg-[#0066B3] rounded-full" />
-            <span>10 / O IMPACTO ALÉM DO ROBÔ</span>
+    <section id="experiencia" className="relative overflow-hidden border-b border-gray-900 bg-gray-950 py-24 text-white lg:py-32">
+      <div className="absolute inset-0 opacity-20 bg-grid-subtle" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-14 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="space-y-4 lg:col-span-8">
+            <div className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-blue-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#ED1C24]" />
+              10 / POR DENTRO DE UMA COMPETIÇÃO
+            </div>
+            <h2 className="text-4xl font-black uppercase leading-[0.98] tracking-[-0.035em] sm:text-5xl lg:text-6xl">
+              MUITO ALÉM<br />
+              <span className="text-[#58AEEA]">DA PARTIDA.</span>
+            </h2>
           </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-950 tracking-tight uppercase leading-[1.08]">
-            UMA FORMAÇÃO <br />
-            <span className="text-[#0066B3]">MULTIDISCIPLINAR</span> COMPLETA
-          </h2>
-
-          <p className="text-base text-gray-600 font-normal leading-relaxed">
-            A FIRST não forma apenas operadores de ferramentas: ela prepara líderes, designers, 
-            gestores de projeto, cientistas de dados e comunicadores sociais.
+          <p className="text-sm leading-relaxed text-gray-400 sm:text-base lg:col-span-4">
+            Enquanto o robô aparece na arena, dezenas de decisões acontecem nos bastidores: projeto, código, estratégia, comunicação, gestão e colaboração.
           </p>
         </div>
 
-        {/* 6 Multidisciplinary Areas Grid in Refined Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {COMPETITION_AREAS.map((area, idx) => (
             <div
               key={idx}
-              className="p-6 bg-white border border-gray-200/90 rounded-2xl hover:border-gray-300 hover:shadow-xs transition-all space-y-3 flex flex-col justify-between"
+              className="group rounded-2xl border border-white/10 bg-white/[0.045] p-5 transition-all hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07]"
             >
-              <div className="space-y-3">
-                <div className="p-2.5 bg-gray-50 border border-gray-100 rounded-xl w-fit">
+              <div className="flex items-start justify-between gap-4">
+                <div className="rounded-xl border border-white/10 bg-white/5 p-2.5 text-blue-300">
                   {getAreaIcon(area.icon)}
                 </div>
-                <h3 className="text-base font-black text-gray-950 uppercase tracking-tight">
-                  {area.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
-                  {area.description}
-                </p>
+                <span className="text-[10px] font-mono text-white/25">0{idx + 1}</span>
               </div>
-
-              <div className="pt-3 text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider border-t border-gray-100 flex items-center justify-between">
-                <span>ÁREA INTEGRADA #{idx + 1}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-              </div>
+              <h3 className="mt-5 text-base font-black uppercase tracking-tight">{area.title}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-gray-400 sm:text-sm">{area.description}</p>
             </div>
           ))}
         </div>
 
-        {/* Editorial Feature: The Atmosphere of the Pits & Judges Room */}
-        <div className="p-8 sm:p-10 bg-gray-950 text-white rounded-2xl border border-gray-800 relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            <div className="lg:col-span-8 space-y-3">
-              <div className="inline-flex items-center gap-2 text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-widest px-2.5 py-1 bg-emerald-950/80 border border-emerald-800/60 rounded-md">
-                <Users className="w-3.5 h-3.5" />
-                <span>A CULTURA DOS PITS (BOXES DE TORNEIO)</span>
+        <div className="mt-10 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
+          <div className="grid grid-cols-1 lg:grid-cols-12">
+            <div className="border-b border-white/10 p-7 sm:p-9 lg:col-span-8 lg:border-b-0 lg:border-r">
+              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-400/10 px-3 py-1.5 text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-300">
+                <Users className="h-3.5 w-3.5" /> NOS PITS
               </div>
-
-              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
-                Onde rivais emprestam peças e código antes da final
+              <h3 className="mt-5 max-w-3xl text-2xl font-black uppercase leading-tight tracking-tight sm:text-3xl">
+                A CORRIDA PARA COLOCAR O ROBÔ DE VOLTA NA ARENA.
               </h3>
-
-              <p className="text-sm text-gray-300 leading-relaxed font-normal">
-                Em qualquer torneio FIRST, o ambiente dos boxes (Pits) é o retrato vivo do <strong>Gracious Professionalism®</strong>. Se um robô quebra seu eixo principal ou queima um controlador de motor nas semifinais, um anúncio é feito pelos alto-falantes e, em segundos, equipes adversárias correm com peças sobressalentes, ferramentas e programadores para colocar o rival de volta na quadra a tempo.
+              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-gray-400">
+                Entre uma partida e outra, equipes reparam mecanismos, revisam código, analisam adversários e ajudam até rivais diretos. É nesse ambiente que o Gracious Professionalism® deixa de ser conceito e vira comportamento.
               </p>
             </div>
 
-            <div className="lg:col-span-4 p-5 bg-white/5 border border-white/10 rounded-xl space-y-3">
-              <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-amber-400 uppercase tracking-wider">
-                <Award className="w-4 h-4" />
-                <span>O QUE OS JURADOS BUSCAM</span>
+            <div className="p-7 sm:p-9 lg:col-span-4">
+              <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-amber-300">
+                <Award className="h-4 w-4" /> O QUE CONTA
               </div>
-              <ul className="text-xs text-gray-300 space-y-2 font-normal">
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-1.5" />
-                  <span>Clareza técnica ao defender escolhas no CAD e na arena</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-1.5" />
-                  <span>Protagonismo genuíno dos estudantes nas decisões</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-1.5" />
-                  <span>Projetos sociais que disseminaram STEAM na comunidade</span>
-                </li>
-              </ul>
+              <div className="mt-5 space-y-4">
+                {[
+                  'Decisões técnicas bem defendidas',
+                  'Protagonismo real dos estudantes',
+                  'Impacto além da competição',
+                  'Capacidade de trabalhar em equipe',
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-3 text-sm text-gray-300">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-300" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
