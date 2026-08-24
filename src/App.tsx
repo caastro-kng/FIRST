@@ -3,23 +3,34 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { AboutFirst } from './components/AboutFirst';
-import { ImpactStats } from './components/ImpactStats';
-import { TeamCulture } from './components/TeamCulture';
-import { HowItWorks } from './components/HowItWorks';
-import { LeaguesCarousel } from './components/LeaguesCarousel';
-import { ComparisonMatrix } from './components/ComparisonMatrix';
-import { ImpactStatement } from './components/ImpactStatement';
-import { StudentJourney } from './components/StudentJourney';
-import { SeasonTimeline } from './components/SeasonTimeline';
-import { CompetitionExperience } from './components/CompetitionExperience';
-import { FirstBrazilSesiSenai } from './components/FirstBrazilSesiSenai';
-import { LeagueFinderQuiz } from './components/LeagueFinderQuiz';
-import { GlossaryModal } from './components/GlossaryModal';
-import { Footer } from './components/Footer';
+
+const ImpactStats = lazy(() => import('./components/ImpactStats').then((module) => ({ default: module.ImpactStats })));
+const LeaguesCarousel = lazy(() => import('./components/LeaguesCarousel').then((module) => ({ default: module.LeaguesCarousel })));
+const ComparisonMatrix = lazy(() => import('./components/ComparisonMatrix').then((module) => ({ default: module.ComparisonMatrix })));
+const HowItWorks = lazy(() => import('./components/HowItWorks').then((module) => ({ default: module.HowItWorks })));
+const TeamCulture = lazy(() => import('./components/TeamCulture').then((module) => ({ default: module.TeamCulture })));
+const ImpactStatement = lazy(() => import('./components/ImpactStatement').then((module) => ({ default: module.ImpactStatement })));
+const StudentJourney = lazy(() => import('./components/StudentJourney').then((module) => ({ default: module.StudentJourney })));
+const SeasonTimeline = lazy(() => import('./components/SeasonTimeline').then((module) => ({ default: module.SeasonTimeline })));
+const CompetitionExperience = lazy(() => import('./components/CompetitionExperience').then((module) => ({ default: module.CompetitionExperience })));
+const FirstBrazilSesiSenai = lazy(() => import('./components/FirstBrazilSesiSenai').then((module) => ({ default: module.FirstBrazilSesiSenai })));
+const Footer = lazy(() => import('./components/Footer').then((module) => ({ default: module.Footer })));
+const LeagueFinderQuiz = lazy(() => import('./components/LeagueFinderQuiz').then((module) => ({ default: module.LeagueFinderQuiz })));
+const GlossaryModal = lazy(() => import('./components/GlossaryModal').then((module) => ({ default: module.GlossaryModal })));
+
+const PageLoadingFallback: React.FC = () => (
+  <div className="border-y border-gray-200 bg-[#F6F7F9] py-16" aria-hidden="true">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="h-3 w-24 animate-pulse rounded-full bg-gray-200" />
+      <div className="mt-5 h-10 max-w-xl animate-pulse rounded-2xl bg-gray-200" />
+      <div className="mt-4 h-4 max-w-2xl animate-pulse rounded-full bg-gray-200/80" />
+    </div>
+  </div>
+);
 
 export default function App() {
   const [glossaryOpen, setGlossaryOpen] = useState(false);
@@ -46,22 +57,36 @@ export default function App() {
       <main className="flex-1">
         <Hero onOpenQuiz={() => setQuizOpen(true)} />
         <AboutFirst />
-        <ImpactStats />
-        <LeaguesCarousel />
-        <ComparisonMatrix />
-        <HowItWorks />
-        <TeamCulture />
-        <ImpactStatement />
-        <StudentJourney />
-        <SeasonTimeline />
-        <CompetitionExperience />
-        <FirstBrazilSesiSenai />
+
+        <Suspense fallback={<PageLoadingFallback />}>
+          <ImpactStats />
+          <LeaguesCarousel />
+          <ComparisonMatrix />
+          <HowItWorks />
+          <TeamCulture />
+          <ImpactStatement />
+          <StudentJourney />
+          <SeasonTimeline />
+          <CompetitionExperience />
+          <FirstBrazilSesiSenai />
+        </Suspense>
       </main>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
 
-      <LeagueFinderQuiz isOpen={quizOpen} onClose={() => setQuizOpen(false)} />
-      <GlossaryModal isOpen={glossaryOpen} onClose={() => setGlossaryOpen(false)} />
+      {quizOpen && (
+        <Suspense fallback={null}>
+          <LeagueFinderQuiz isOpen={quizOpen} onClose={() => setQuizOpen(false)} />
+        </Suspense>
+      )}
+
+      {glossaryOpen && (
+        <Suspense fallback={null}>
+          <GlossaryModal isOpen={glossaryOpen} onClose={() => setGlossaryOpen(false)} />
+        </Suspense>
+      )}
     </div>
   );
 }
