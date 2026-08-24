@@ -34,13 +34,15 @@
     font-family: 'JetBrains Mono', 'Courier New', monospace;
   }
 
+  /* Keep anchored sections flush with the bottom of the fixed header.
+     The header is 62px tall while scrolled on mobile and 68px on desktop. */
   section, [id] {
-    scroll-margin-top: 78px;
+    scroll-margin-top: 62px;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 640px) {
     section, [id] {
-      scroll-margin-top: 96px;
+      scroll-margin-top: 68px;
     }
   }
 
