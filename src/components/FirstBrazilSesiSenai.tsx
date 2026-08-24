@@ -9,6 +9,33 @@ const BRAZIL_STATS = [
   { value: '19', label: 'UFs representadas', detail: 'alcance nacional', icon: MapPinned },
 ];
 
+const DF_STORIES = [
+  {
+    eyebrow: 'BRASÍLIA → OFICINA',
+    title: 'ROBOT’S DISTRICT • FRC 9484',
+    description: 'A equipe do SESI/SENAI-DF em preparação técnica, trabalhando diretamente no robô e na integração dos sistemas.',
+    image: 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_2.jpg',
+    alt: 'Integrantes da Robot’s District do SESI-DF trabalhando no robô da FRC 9484 em Brasília.',
+    href: 'https://www.sistemafibra.org.br/sesi/imprensa/noticias/2122-com-a-robot-s-district-sesi-df-participa-pela-primeira-vez-da-first-robotics-competition',
+  },
+  {
+    eyebrow: 'BRASÍLIA → HOUSTON',
+    title: 'ROBOT’S DISTRICT NO FIRST CHAMPIONSHIP 2026',
+    description: 'A equipe do Distrito Federal chegou ao mundial pelo segundo ano consecutivo, representando SESI e SENAI-DF em Houston.',
+    image: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/04-abril/29-04-2026_Equipe_Robots_District_Foto_Dayane_dos_Santos_Sistema_Fibra.jpg',
+    alt: 'Equipe Robot’s District reunida em Houston durante o FIRST Championship 2026.',
+    href: 'https://www.sistemafibra.org.br/senai/40-noticias/destaques/1833-houston-chegamos-sesi-e-senai-df-competem-no-first-championship',
+  },
+  {
+    eyebrow: 'BRASÍLIA → CONQUISTA',
+    title: 'FEDERAL FORCE • ROOKIE ALL-STAR 2025',
+    description: 'No FIRST Championship 2025, a Federal Force conquistou o Rookie All-Star Award na divisão Arquimedes.',
+    image: 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2025/04_abril/interna-Foto-SamiraPadua-SistemaFibra1.jpg',
+    alt: 'Integrantes da Federal Force comemorando conquista no FIRST Championship 2025.',
+    href: 'https://www.sistemafibra.org.br/sesi/institucional/imprensa/noticias/2217-equipe-do-df-e-premiada-no-first-championship-2025',
+  },
+];
+
 export const FirstBrazilSesiSenai: React.FC = () => {
   const reduceMotion = useReducedMotion();
 
@@ -74,6 +101,49 @@ export const FirstBrazilSesiSenai: React.FC = () => {
             </div>
           </div>
         </motion.div>
+
+        <div className="mb-12">
+          <div className="mb-5 flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">
+            <span>DO DISTRITO FEDERAL PARA O MUNDO</span>
+            <span className="h-px flex-1 bg-gray-200" />
+          </div>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+            {DF_STORIES.map((story, index) => (
+              <motion.a
+                key={story.title}
+                href={story.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: reduceMotion ? 0 : 0.3, delay: reduceMotion ? 0 : index * 0.05 }}
+                whileHover={reduceMotion ? undefined : { y: -4 }}
+                className={`${index === 0 ? 'lg:col-span-5' : 'lg:col-span-7 xl:col-span-7'} group relative min-h-[320px] overflow-hidden rounded-3xl border border-gray-200 bg-gray-950 shadow-sm ${index === 2 ? 'lg:col-start-6' : ''}`}
+                aria-label={`${story.title} — abrir matéria do Sistema Fibra em nova aba`}
+              >
+                <img
+                  src={story.image}
+                  alt={story.alt}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/5" />
+                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+                  <div className="text-[10px] font-mono font-bold uppercase tracking-[0.16em] text-blue-300">{story.eyebrow}</div>
+                  <h3 className="mt-2 text-xl font-black uppercase tracking-tight text-white sm:text-2xl">{story.title}</h3>
+                  <p className="mt-2 max-w-2xl text-xs leading-relaxed text-white/75 sm:text-sm">{story.description}</p>
+                  <div className="mt-4 inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-wider text-white/80">
+                    Ver história <ArrowUpRight className="h-3.5 w-3.5" />
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </div>
 
         <div className="mb-12 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {BRAZIL_STATS.map((stat, index) => {
@@ -165,7 +235,7 @@ export const FirstBrazilSesiSenai: React.FC = () => {
 
         <div className="mt-5 flex flex-col gap-1 text-[10px] font-mono uppercase tracking-wider text-gray-400 sm:flex-row sm:items-center sm:justify-between">
           <span>Dados de participação: Festival SESI de Educação 2026.</span>
-          <span>Fonte: SESI / Sistema Indústria.</span>
+          <span>Fotos e histórias do DF: Sistema Fibra / SESI-DF / SENAI-DF.</span>
         </div>
       </div>
     </section>
