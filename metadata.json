@@ -1,0 +1,6 @@
+{
+  "name": "FIRST Robotics — Mais Que Robôs",
+  "description": "Guia educacional completo e interativo sobre o ecossistema FIRST Robotics: ligas FLL, FTC e FRC, temporadas, engenharia e impacto formativo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

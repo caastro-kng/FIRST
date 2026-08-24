@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 450" fill="none">
+  <!-- FIRST Official Emblem & Wordmark Vector Asset -->
+  <!-- 3D Interlocking Geometry: Red Triangle, Silver Circle, Blue Diamond -->
+  <g transform="translate(45, 20)">
+    <!-- Red Triangle (Isometric 3D) -->
+    <!-- 3D depth side -->
+    <polygon points="120,40 100,55 100,215 120,200" fill="#9E1217" />
+    <polygon points="100,215 120,200 210,200 190,215" fill="#780E12" />
+    <!-- Front Face -->
+    <path d="M120 40 L210 200 H160 L140 160 H100 L80 200 H30 L120 40 Z" fill="#ED1C24" />
+    <!-- Inner Cutout -->
+    <polygon points="120,95 145,145 95,145" fill="#FFFFFF" />
+
+    <!-- Blue Diamond (Isometric 3D) -->
+    <!-- 3D depth side -->
+    <polygon points="260,40 240,55 240,145 260,130" fill="#004680" />
+    <polygon points="310,130 330,115 350,135 330,150" fill="#003561" />
+    <!-- Front Face -->
+    <polygon points="260,40 330,115 260,190 190,115" fill="#0066B3" />
+    <!-- Inner Diamond Cutout -->
+    <polygon points="260,78 300,115 260,152 220,115" fill="#FFFFFF" />
+
+    <!-- Interlocking Silver Circle/Ring -->
+    <path d="M175 140 C160 140 145 130 140 115 C135 100 140 85 152 75 C165 65 185 65 198 75 C210 85 215 100 210 115 C205 130 190 140 175 140 Z" 
+          stroke="#A0A5AA" stroke-width="22" fill="none" stroke-linejoin="round" />
+    <path d="M172 138 C158 138 144 128 140 114 C136 100 140 86 151 76" 
+          stroke="#7A8086" stroke-width="6" fill="none" />
+  </g>
+
+  <!-- Wordmark: FIRST (Bold Black Italic Sans) -->
+  <g transform="translate(25, 270)">
+    <!-- F -->
+    <path d="M30 100 L58 5 H132 L122 35 H82 L76 56 H112 L102 86 H66 L50 140 H10 L30 100 Z" fill="#111827" />
+    <!-- I -->
+    <polygon points="120,140 148,5 186,5 158,140" fill="#111827" />
+    <!-- R -->
+    <path d="M180 140 L208 5 H265 C295 5 312 18 306 48 C302 68 288 82 268 88 L296 140 H254 L232 94 H215 L205 140 H180 Z M228 35 L220 70 H248 C262 70 270 64 272 52 C274 40 268 35 254 35 H228 Z" fill="#111827" />
+    <!-- S -->
+    <path d="M300 128 C306 138 318 144 335 144 C358 144 372 132 374 116 C376 96 352 90 338 82 C318 72 312 60 315 42 C318 18 340 5 368 5 C388 5 404 12 412 24 L392 50 C386 42 376 36 362 36 C344 36 338 44 336 52 C334 68 358 74 372 82 C394 94 400 108 396 128 C392 152 368 165 336 165 C310 165 290 154 280 138 L300 128 Z" fill="#111827" />
+    <!-- T -->
+    <polygon points="388,35 435,35 414,140 376,140 397,35 372,35 378,5 455,5 448,35" fill="#111827" />
+    <!-- ® Symbol -->
+    <circle cx="448" cy="20" r="10" stroke="#111827" stroke-width="2.5" fill="none" />
+    <text x="448" y="24" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#111827">R</text>
+  </g>
+</svg>
