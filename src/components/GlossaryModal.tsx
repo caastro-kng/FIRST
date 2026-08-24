@@ -1,11 +1,13 @@
-import React, { useEffect, useId, useState } from 'react';
+import React, { useEffect, useId, useMemo, useState } from 'react';
 import { GLOSSARY_TERMS } from '../data/firstData';
-import { BookOpen, Search, X } from 'lucide-react';
+import { BookOpen, Search, X, RotateCcw } from 'lucide-react';
 
 interface GlossaryModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const CATEGORIES = ['Todas', 'Arena', 'Hardware', 'Software', 'Estratégia', 'Cultura FIRST'];
 
 export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -30,16 +32,29 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
     };
   }, [isOpen, onClose]);
 
+  const categoryCounts = useMemo(() => {
+    return CATEGORIES.reduce<Record<string, number>>((acc, category) => {
+      acc[category] = category === 'Todas' ? GLOSSARY_TERMS.length : GLOSSARY_TERMS.filter((item) => item.category === category).length;
+      return acc;
+    }, {});
+  }, []);
+
   if (!isOpen) return null;
 
-  const categories = ['Todas', 'Arena', 'Hardware', 'Software', 'Estratégia', 'Cultura FIRST'];
-
+  const query = searchTerm.trim().toLowerCase();
   const filteredTerms = GLOSSARY_TERMS.filter((item) => {
-    const query = searchTerm.toLowerCase();
-    const matchesSearch = item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query);
+    const searchable = `${item.term} ${item.definition} ${item.example} ${item.category}`.toLowerCase();
+    const matchesSearch = !query || searchable.includes(query);
     const matchesCategory = activeCategory === 'Todas' || item.category === activeCategory;
     return matchesSearch && matchesCategory;
   });
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setActiveCategory('Todas');
+  };
+
+  const hasFilters = searchTerm.length > 0 || activeCategory !== 'Todas';
 
   return (
     <div
@@ -82,15 +97,16 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
             <input
               id={searchId}
               type="search"
-              placeholder="Buscar termo ou conceito (ex: Swerve, Autônomo, AprilTag)..."
+              placeholder="Buscar termo, conceito ou exemplo (ex: Swerve, AprilTag, aliança)..."
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
+              autoFocus
               className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-medium focus:border-[#0066B3] focus:bg-white transition-colors"
             />
           </div>
 
           <div className="flex flex-wrap gap-1.5 pt-1" aria-label="Filtrar termos por categoria">
-            {categories.map((category) => (
+            {CATEGORIES.map((category) => (
               <button
                 type="button"
                 key={category}
@@ -102,7 +118,7 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
                     : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border-gray-200'
                 }`}
               >
-                {category}
+                {category} <span className={activeCategory === category ? 'text-white/50' : 'text-gray-400'}>{categoryCounts[category]}</span>
               </button>
             ))}
           </div>
@@ -112,9 +128,9 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
           {filteredTerms.length > 0 ? (
             filteredTerms.map((item, index) => (
               <article key={`${item.term}-${index}`} className={index > 0 ? 'pt-4 space-y-2' : 'space-y-2'}>
-                <div className="flex items-center justify-between gap-2">
+                <div className="flex items-start justify-between gap-3">
                   <h3 className="text-sm sm:text-base font-black text-gray-950 uppercase tracking-tight">{item.term}</h3>
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 bg-gray-100 text-gray-600 rounded-md uppercase tracking-wider">{item.category}</span>
+                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 bg-gray-100 text-gray-600 rounded-md uppercase tracking-wider shrink-0">{item.category}</span>
                 </div>
                 <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">{item.definition}</p>
                 <div className="p-3 bg-gray-50 border border-gray-200/80 rounded-xl text-xs text-gray-700 font-mono">
@@ -124,19 +140,41 @@ export const GlossaryModal: React.FC<GlossaryModalProps> = ({ isOpen, onClose })
               </article>
             ))
           ) : (
-            <div className="text-center py-12 text-gray-500 text-xs font-mono">Nenhum termo encontrado para a busca “{searchTerm}”.</div>
+            <div className="text-center py-12">
+              <div className="text-gray-500 text-xs font-mono mb-4">Nenhum termo encontrado para “{searchTerm}”.</div>
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-700 hover:bg-gray-100"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                Limpar filtros
+              </button>
+            </div>
           )}
         </div>
 
         <div className="p-4 border-t border-gray-200 bg-gray-50/80 flex items-center justify-between gap-4 shrink-0 text-xs font-mono text-gray-500">
-          <span>{filteredTerms.length} TERMOS ENCONTRADOS</span>
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors shadow-2xs"
-          >
-            Fechar glossário
-          </button>
+          <span>{filteredTerms.length} DE {GLOSSARY_TERMS.length} TERMOS</span>
+          <div className="flex items-center gap-2">
+            {hasFilters && (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-600 hover:text-gray-950 transition-colors"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                Limpar
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 text-[10px] font-mono font-bold uppercase tracking-wider text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors shadow-2xs"
+            >
+              Fechar glossário
+            </button>
+          </div>
         </div>
       </div>
     </div>
