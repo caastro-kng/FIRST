@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { AboutFirst } from './components/AboutFirst';
-import { FirstBrazilSesiSenai } from './components/FirstBrazilSesiSenai';
+import { ImpactStats } from './components/ImpactStats';
 import { TeamCulture } from './components/TeamCulture';
 import { HowItWorks } from './components/HowItWorks';
 import { LeaguesCarousel } from './components/LeaguesCarousel';
@@ -16,6 +16,7 @@ import { ImpactStatement } from './components/ImpactStatement';
 import { StudentJourney } from './components/StudentJourney';
 import { SeasonTimeline } from './components/SeasonTimeline';
 import { CompetitionExperience } from './components/CompetitionExperience';
+import { FirstBrazilSesiSenai } from './components/FirstBrazilSesiSenai';
 import { LeagueFinderQuiz } from './components/LeagueFinderQuiz';
 import { GlossaryModal } from './components/GlossaryModal';
 import { Footer } from './components/Footer';
@@ -40,20 +41,21 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FBFBFB] text-[#111827] antialiased selection:bg-[#0066B3] selection:text-white">
-      <Header />
+      <Header onOpenGlossary={() => setGlossaryOpen(true)} />
 
       <main className="flex-1">
         <Hero onOpenQuiz={() => setQuizOpen(true)} />
         <AboutFirst />
-        <FirstBrazilSesiSenai />
-        <TeamCulture />
-        <HowItWorks />
+        <ImpactStats />
         <LeaguesCarousel />
         <ComparisonMatrix />
+        <HowItWorks />
+        <TeamCulture />
         <ImpactStatement />
         <StudentJourney />
         <SeasonTimeline />
         <CompetitionExperience />
+        <FirstBrazilSesiSenai />
       </main>
 
       <Footer />
