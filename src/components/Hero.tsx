@@ -5,22 +5,22 @@ interface HeroProps {
   onOpenQuiz: () => void;
 }
 
+const HERO_IMAGE_URL = 'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg';
+
 export const Hero: React.FC<HeroProps> = ({ onOpenQuiz }) => {
   return (
     <section id="inicio" className="relative overflow-hidden bg-gray-950 pt-[66px] sm:pt-[76px] lg:pt-28">
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1440&q=78"
-          srcSet="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=720&q=72 720w, https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1080&q=76 1080w, https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1440&q=78 1440w"
-          sizes="100vw"
-          alt="Robótica competitiva em ambiente de arena"
-          className="h-full w-full object-cover object-center opacity-45"
+          src={HERO_IMAGE_URL}
+          alt="Arena lotada durante o FIRST Championship, com campos de competição, equipes e público"
+          className="h-full w-full object-cover object-center opacity-50"
           fetchPriority="high"
           decoding="async"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/90 to-gray-950/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-gray-950/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/88 to-gray-950/28" />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-gray-950/25" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 pb-10 sm:px-6 sm:pb-14 lg:px-8 lg:pb-20">
