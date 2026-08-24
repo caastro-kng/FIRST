@@ -1,12 +1,18 @@
-import React, { useEffect, useId, useState } from 'react';
+import React, { useEffect, useId, useMemo, useState } from 'react';
 import { QUIZ_QUESTIONS, LEAGUES_DATA } from '../data/firstData';
 import { LeagueId } from '../types/first';
-import { Compass, RotateCcw, ArrowRight, Sparkles, X } from 'lucide-react';
+import { Compass, RotateCcw, ArrowRight, Sparkles, X, BarChart3 } from 'lucide-react';
 
 interface LeagueFinderQuizProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const LEAGUE_META: Record<LeagueId, { label: string; accent: string; soft: string }> = {
+  fll: { label: 'FLL', accent: '#FF5F00', soft: '#FFF4E8' },
+  ftc: { label: 'FTC', accent: '#0066B3', soft: '#EAF5FF' },
+  frc: { label: 'FRC', accent: '#ED1C24', soft: '#FFF0F1' },
+};
 
 export const LeagueFinderQuiz: React.FC<LeagueFinderQuizProps> = ({ isOpen, onClose }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -30,6 +36,15 @@ export const LeagueFinderQuiz: React.FC<LeagueFinderQuizProps> = ({ isOpen, onCl
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose]);
+
+  const scoreBreakdown = useMemo(() => {
+    const total = scores.fll + scores.ftc + scores.frc;
+    return (['fll', 'ftc', 'frc'] as LeagueId[]).map((league) => ({
+      league,
+      score: scores[league],
+      percent: total > 0 ? Math.round((scores[league] / total) * 100) : 0,
+    }));
+  }, [scores]);
 
   if (!isOpen) return null;
 
@@ -58,6 +73,7 @@ export const LeagueFinderQuiz: React.FC<LeagueFinderQuizProps> = ({ isOpen, onCl
   };
 
   const recommendedLeague = result ? LEAGUES_DATA[result] : null;
+  const recommendedMeta = result ? LEAGUE_META[result] : null;
 
   return (
     <div
@@ -130,25 +146,51 @@ export const LeagueFinderQuiz: React.FC<LeagueFinderQuizProps> = ({ isOpen, onCl
             </div>
           </div>
         ) : (
-          recommendedLeague && (
+          recommendedLeague && recommendedMeta && (
             <div className="space-y-5 text-center sm:text-left" aria-live="polite">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-full">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
-                <span>CATEGORIA RECOMENDADA</span>
+              <div
+                className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-full border"
+                style={{ backgroundColor: recommendedMeta.soft, borderColor: `${recommendedMeta.accent}30`, color: recommendedMeta.accent }}
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>CATEGORIA MAIS COMPATÍVEL</span>
               </div>
 
               <div>
                 <h2 id={titleId} className="text-2xl sm:text-3xl font-black text-gray-950 uppercase tracking-tight">
                   {recommendedLeague.name} ({recommendedLeague.acronym})
                 </h2>
-                <p className="text-xs font-mono font-bold text-[#0066B3] uppercase mt-1">{recommendedLeague.tagline}</p>
+                <p className="text-xs font-mono font-bold uppercase mt-1" style={{ color: recommendedMeta.accent }}>{recommendedLeague.tagline}</p>
               </div>
 
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Com base no perfil informado de faixa etária, recursos laboratoriais e foco de aprendizado, a <strong>{recommendedLeague.acronym}</strong> é uma boa categoria para começar a explorar o ecossistema FIRST.
+                Pelas respostas, a <strong>{recommendedLeague.acronym}</strong> aparece como a categoria mais compatível com seu perfil atual. O resultado é orientativo: idade, disponibilidade de equipe, estrutura e objetivos locais também influenciam a escolha.
               </p>
 
-              <div className="p-4 bg-gray-50 border border-gray-200/80 rounded-xl text-left space-y-2 text-xs font-mono">
+              <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4 text-left">
+                <div className="flex items-center gap-2 mb-4 text-[10px] font-mono font-bold uppercase tracking-widest text-gray-500">
+                  <BarChart3 className="w-4 h-4" />
+                  Afinidade entre as ligas
+                </div>
+                <div className="space-y-3">
+                  {scoreBreakdown.map(({ league, percent }) => {
+                    const meta = LEAGUE_META[league];
+                    return (
+                      <div key={league}>
+                        <div className="mb-1.5 flex items-center justify-between gap-3 text-[10px] font-mono font-bold uppercase">
+                          <span style={{ color: meta.accent }}>{meta.label}</span>
+                          <span className="text-gray-500">{percent}%</span>
+                        </div>
+                        <div className="h-2 overflow-hidden rounded-full bg-gray-200">
+                          <div className="h-full rounded-full transition-all duration-500" style={{ width: `${percent}%`, backgroundColor: meta.accent }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="p-4 bg-white border border-gray-200 rounded-xl text-left space-y-2 text-xs font-mono">
                 <div className="flex justify-between gap-4"><span className="text-gray-500 uppercase">Idade sugerida:</span><span className="font-bold text-gray-900 text-right">{recommendedLeague.targetAge}</span></div>
                 <div className="flex justify-between gap-4"><span className="text-gray-500 uppercase">Tamanho da equipe:</span><span className="font-bold text-gray-900 text-right">{recommendedLeague.teamSize}</span></div>
                 <div className="flex justify-between gap-4"><span className="text-gray-500 uppercase">Linguagem chave:</span><span className="font-bold text-gray-900 text-right">{recommendedLeague.programming.join(' ou ')}</span></div>
@@ -158,7 +200,8 @@ export const LeagueFinderQuiz: React.FC<LeagueFinderQuizProps> = ({ isOpen, onCl
                 <a
                   href="#ligas"
                   onClick={onClose}
-                  className="w-full sm:w-auto flex-1 flex items-center justify-center gap-2 py-3 px-5 text-xs font-mono font-bold uppercase tracking-wider text-white bg-[#0066B3] hover:bg-[#005291] rounded-xl transition-all shadow-2xs"
+                  className="w-full sm:w-auto flex-1 flex items-center justify-center gap-2 py-3 px-5 text-xs font-mono font-bold uppercase tracking-wider text-white rounded-xl transition-all shadow-2xs"
+                  style={{ backgroundColor: recommendedMeta.accent }}
                 >
                   <span>Explorar {recommendedLeague.acronym} nas ligas</span>
                   <ArrowRight className="w-4 h-4" />
