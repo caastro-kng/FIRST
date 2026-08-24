@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { STUDENT_JOURNEY_STAGES } from '../data/firstData';
 import { ArrowRight, GraduationCap, Sparkles, TrendingUp } from 'lucide-react';
 
 const JOURNEY_IMAGES = [
-  'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=72',
+  'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=72',
+  'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1000&q=72',
+  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=72',
 ];
 
 export const StudentJourney: React.FC = () => {
   const [currentStage, setCurrentStage] = useState(0);
+  const reduceMotion = useReducedMotion();
   const stage = STUDENT_JOURNEY_STAGES[currentStage];
   const stageName = stage.stage.split('.')[1]?.trim() || stage.stage;
 
@@ -66,13 +67,13 @@ export const StudentJourney: React.FC = () => {
           </div>
 
           <div className="lg:col-span-8 bg-gray-950 rounded-[28px] overflow-hidden text-white relative min-h-[600px]">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={currentStage}
-                initial={{ opacity: 0 }}
+                initial={reduceMotion ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
+                exit={reduceMotion ? undefined : { opacity: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.22 }}
                 className="h-full"
               >
                 <div className="relative h-[300px] sm:h-[350px] lg:h-[380px] overflow-hidden">
@@ -81,6 +82,8 @@ export const StudentJourney: React.FC = () => {
                     alt={stageName}
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/30 to-transparent" />
@@ -106,39 +109,15 @@ export const StudentJourney: React.FC = () => {
 
                 <div className="p-6 sm:p-8 lg:p-9 grid grid-cols-1 lg:grid-cols-12 gap-7">
                   <div className="lg:col-span-7 space-y-5">
-                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                      {stage.description}
-                    </p>
-
+                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">{stage.description}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="border-t border-white/10 pt-4">
-                        <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-400 mb-3">
-                          <TrendingUp className="w-4 h-4" />
-                          COMPETÊNCIAS TÉCNICAS
-                        </div>
-                        <ul className="space-y-2 text-xs text-gray-300">
-                          {stage.technicalSkills.slice(0, 3).map((item, index) => (
-                            <li key={index} className="flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#0066B3] mt-1.5 shrink-0" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
+                        <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-blue-400 mb-3"><TrendingUp className="w-4 h-4" />COMPETÊNCIAS TÉCNICAS</div>
+                        <ul className="space-y-2 text-xs text-gray-300">{stage.technicalSkills.slice(0, 3).map((item, index) => <li key={index} className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#0066B3] mt-1.5 shrink-0" /><span>{item}</span></li>)}</ul>
                       </div>
-
                       <div className="border-t border-white/10 pt-4">
-                        <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-red-400 mb-3">
-                          <Sparkles className="w-4 h-4" />
-                          DESENVOLVIMENTO HUMANO
-                        </div>
-                        <ul className="space-y-2 text-xs text-gray-300">
-                          {stage.softSkills.slice(0, 3).map((item, index) => (
-                            <li key={index} className="flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#ED1C24] mt-1.5 shrink-0" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
+                        <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-red-400 mb-3"><Sparkles className="w-4 h-4" />DESENVOLVIMENTO HUMANO</div>
+                        <ul className="space-y-2 text-xs text-gray-300">{stage.softSkills.slice(0, 3).map((item, index) => <li key={index} className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#ED1C24] mt-1.5 shrink-0" /><span>{item}</span></li>)}</ul>
                       </div>
                     </div>
                   </div>
@@ -150,9 +129,7 @@ export const StudentJourney: React.FC = () => {
                         <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-400 mb-2">RESULTADO FORMATIVO</div>
                         <p className="text-sm text-gray-200 leading-relaxed">{stage.outcome}</p>
                       </div>
-                      <div className="mt-8 pt-4 border-t border-white/10 text-[10px] font-mono uppercase text-gray-500">
-                        EXPERIÊNCIA → AUTONOMIA → LIDERANÇA
-                      </div>
+                      <div className="mt-8 pt-4 border-t border-white/10 text-[10px] font-mono uppercase text-gray-500">EXPERIÊNCIA → AUTONOMIA → LIDERANÇA</div>
                     </div>
                   </div>
                 </div>
