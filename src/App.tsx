@@ -7,6 +7,7 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { AboutFirst } from './components/AboutFirst';
+import { LeagueId } from './types/first';
 
 const ImpactStats = lazy(() => import('./components/ImpactStats').then((module) => ({ default: module.ImpactStats })));
 const LeaguesCarousel = lazy(() => import('./components/LeaguesCarousel').then((module) => ({ default: module.LeaguesCarousel })));
@@ -36,10 +37,20 @@ export default function App() {
   const [glossaryOpen, setGlossaryOpen] = useState(false);
   const [glossaryQuery, setGlossaryQuery] = useState('');
   const [quizOpen, setQuizOpen] = useState(false);
+  const [selectedLeague, setSelectedLeague] = useState<LeagueId | null>(null);
 
   const openGlossary = (query = '') => {
     setGlossaryQuery(query);
     setGlossaryOpen(true);
+  };
+
+  const handleExploreLeague = (league: LeagueId) => {
+    setSelectedLeague(league);
+    setQuizOpen(false);
+
+    window.requestAnimationFrame(() => {
+      document.getElementById('ligas')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   };
 
   useEffect(() => {
@@ -70,7 +81,7 @@ export default function App() {
 
         <Suspense fallback={<PageLoadingFallback />}>
           <ImpactStats />
-          <LeaguesCarousel onOpenGlossary={openGlossary} />
+          <LeaguesCarousel selectedLeague={selectedLeague} onOpenGlossary={openGlossary} />
           <ComparisonMatrix />
           <HowItWorks />
           <TeamCulture />
@@ -88,7 +99,7 @@ export default function App() {
 
       {quizOpen && (
         <Suspense fallback={null}>
-          <LeagueFinderQuiz isOpen={quizOpen} onClose={() => setQuizOpen(false)} />
+          <LeagueFinderQuiz isOpen={quizOpen} onClose={() => setQuizOpen(false)} onExploreLeague={handleExploreLeague} />
         </Suspense>
       )}
 
