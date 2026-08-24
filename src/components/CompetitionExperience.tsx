@@ -2,6 +2,9 @@ import React from 'react';
 import { COMPETITION_AREAS } from '../data/firstData';
 import { Wrench, Code, LineChart, Palette, Coins, Sparkles, Users, Award } from 'lucide-react';
 
+const ARENA_IMAGE = 'https://www.firstinspires.org/hs-fs/hubfs/frc_crowd_1jc2110_1.jpg?width=1400';
+const PITS_IMAGE = 'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0125_1.jpg?width=1000';
+
 export const CompetitionExperience: React.FC = () => {
   const getAreaIcon = (iconName: string) => {
     switch (iconName) {
@@ -33,6 +36,42 @@ export const CompetitionExperience: React.FC = () => {
           <p className="text-sm leading-relaxed text-gray-400 sm:text-base lg:col-span-4">
             Enquanto o robô aparece na arena, dezenas de decisões acontecem nos bastidores: projeto, código, estratégia, comunicação, gestão e colaboração.
           </p>
+        </div>
+
+        <div className="mb-10 grid grid-cols-1 gap-4 lg:grid-cols-12">
+          <figure className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] lg:col-span-8 lg:min-h-[390px]">
+            <img
+              src={ARENA_IMAGE}
+              alt="Grande evento FIRST com arena, equipes e público acompanhando as partidas"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent" />
+            <figcaption className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+              <div className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-blue-300">ARENA • ESTRATÉGIA • PRESSÃO</div>
+              <div className="mt-2 max-w-xl text-xl font-black uppercase tracking-tight sm:text-2xl">A partida é o momento visível de semanas de engenharia.</div>
+            </figcaption>
+          </figure>
+
+          <figure className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] lg:col-span-4 lg:min-h-[390px]">
+            <img
+              src={PITS_IMAGE}
+              alt="Estudantes da FIRST trabalhando próximos a um robô de competição nos bastidores do evento"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/25 to-transparent" />
+            <figcaption className="absolute bottom-0 left-0 right-0 p-6">
+              <div className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-emerald-300">PITS • MANUTENÇÃO • COLABORAÇÃO</div>
+              <div className="mt-2 text-lg font-black uppercase tracking-tight">Onde o robô volta para a arena.</div>
+            </figcaption>
+          </figure>
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
