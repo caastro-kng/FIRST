@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 125" fill="none">
+  <!-- SENAI Official Vector Graphic Asset -->
+  <!-- Red Brand Rectangle Background -->
+  <rect width="500" height="125" fill="#E30613" />
+
+  <!-- Left Speed Lines (5 horizontal white bars) -->
+  <g fill="#FFFFFF">
+    <rect x="0" y="18" width="28" height="4" />
+    <rect x="0" y="38" width="28" height="4" />
+    <rect x="0" y="58" width="28" height="4" />
+    <rect x="0" y="78" width="28" height="4" />
+    <rect x="0" y="98" width="28" height="4" />
+  </g>
+
+  <!-- Right Speed Lines (5 horizontal white bars) -->
+  <g fill="#FFFFFF">
+    <rect x="472" y="18" width="28" height="4" />
+    <rect x="472" y="38" width="28" height="4" />
+    <rect x="472" y="58" width="28" height="4" />
+    <rect x="472" y="78" width="28" height="4" />
+    <rect x="472" y="98" width="28" height="4" />
+  </g>
+
+  <!-- SENAI Bold Italic Wordmark in White -->
+  <g fill="#FFFFFF" transform="translate(35, 16)">
+    <!-- S -->
+    <path d="M62 76 C55 83 44 87 31 87 C12 87 2 77 5 58 C6 49 14 43 27 39 L40 35 C52 31 56 26 58 17 C60 6 52 0 37 0 C23 0 13 5 7 13 L20 23 C24 18 30 15 38 15 C45 15 48 18 47 23 C46 29 40 33 29 36 L17 40 C4 44 -2 52 0 65 C3 84 18 95 38 95 C54 95 68 87 75 75 L62 76 Z" />
+    
+    <!-- E -->
+    <path d="M80 93 L97 2 H160 L156 18 H115 L110 37 H148 L144 53 H106 L101 77 H145 L141 93 H80 Z" />
+    
+    <!-- N -->
+    <path d="M165 93 L182 2 H203 L245 61 L256 2 H275 L258 93 H238 L195 33 L184 93 H165 Z" />
+    
+    <!-- A -->
+    <path d="M295 93 L325 2 H354 L368 93 H347 L344 71 H314 L308 93 H295 Z M318 55 H341 L334 22 L318 55 Z" />
+    
+    <!-- I -->
+    <path d="M375 93 L392 2 H414 L397 93 H375 Z" />
+  </g>
+</svg>

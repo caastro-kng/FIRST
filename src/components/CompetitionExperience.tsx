@@ -16,83 +16,89 @@ export const CompetitionExperience: React.FC = () => {
   };
 
   return (
-    <section id="experiencia" className="py-16 lg:py-24 bg-[#F8FAFC] border-b border-gray-200 relative">
+    <section id="experiencia" className="py-20 lg:py-28 bg-[#FAFAFA] border-b border-gray-200 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header with Geometric Balance */}
-        <div className="max-w-3xl mb-12 space-y-2 pb-4 border-b border-gray-200">
-          <div className="flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-widest text-[#0066B3]">
-            <span className="w-1.5 h-1.5 bg-[#0066B3]" />
-            <span>10 / O IMPACTO ALÉM DO ROBÔ & MULTIDISCIPLINARIDADE</span>
+        {/* Section Header */}
+        <div className="max-w-3xl mb-14 space-y-3">
+          <div className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#0066B3]">
+            <span className="w-1.5 h-1.5 bg-[#0066B3] rounded-full" />
+            <span>10 / O IMPACTO ALÉM DO ROBÔ</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-[#1A1A1A] tracking-tight uppercase">
-            Uma formação multidisciplinar completa
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-950 tracking-tight uppercase leading-[1.08]">
+            UMA FORMAÇÃO <br />
+            <span className="text-[#0066B3]">MULTIDISCIPLINAR</span> COMPLETA
           </h2>
-          <p className="text-sm sm:text-base text-gray-600 font-medium leading-relaxed">
+
+          <p className="text-base text-gray-600 font-normal leading-relaxed">
             A FIRST não forma apenas operadores de ferramentas: ela prepara líderes, designers, 
             gestores de projeto, cientistas de dados e comunicadores sociais.
           </p>
         </div>
 
-        {/* 6 Multidisciplinary Areas Grid in Geometric Frames */}
+        {/* 6 Multidisciplinary Areas Grid in Refined Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {COMPETITION_AREAS.map((area, idx) => (
             <div
               key={idx}
-              className="p-6 bg-white border border-gray-200 hover:border-gray-400 transition-colors space-y-3 flex flex-col justify-between"
+              className="p-6 bg-white border border-gray-200/90 rounded-2xl hover:border-gray-300 hover:shadow-xs transition-all space-y-3 flex flex-col justify-between"
             >
               <div className="space-y-3">
-                <div className="p-2 bg-gray-50 border border-gray-200 w-fit">
+                <div className="p-2.5 bg-gray-50 border border-gray-100 rounded-xl w-fit">
                   {getAreaIcon(area.icon)}
                 </div>
-                <h3 className="text-sm font-black text-[#1A1A1A] uppercase tracking-tight">
+                <h3 className="text-base font-black text-gray-950 uppercase tracking-tight">
                   {area.title}
                 </h3>
-                <p className="text-xs text-gray-600 leading-relaxed font-medium">
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
                   {area.description}
                 </p>
               </div>
 
-              <div className="pt-2 text-[9px] font-mono font-bold text-gray-400 uppercase tracking-widest border-t border-gray-100">
-                ÁREA INTEGRADA DE EQUIPE
+              <div className="pt-3 text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider border-t border-gray-100 flex items-center justify-between">
+                <span>ÁREA INTEGRADA #{idx + 1}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
               </div>
             </div>
           ))}
         </div>
 
-        {/* Editorial Feature: The Atmosphere of the Pits & Judges Room in Geometric Card */}
-        <div className="p-6 sm:p-10 bg-[#1A1A1A] text-white border border-gray-800 relative">
+        {/* Editorial Feature: The Atmosphere of the Pits & Judges Room */}
+        <div className="p-8 sm:p-10 bg-gray-950 text-white rounded-2xl border border-gray-800 relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             <div className="lg:col-span-8 space-y-3">
-              <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-widest px-2.5 py-1 bg-emerald-950/80 border border-emerald-800/60 rounded-md">
                 <Users className="w-3.5 h-3.5" />
                 <span>A CULTURA DOS PITS (BOXES DE TORNEIO)</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight uppercase">
-                Onde rivais emprestam motores minutos antes da grande final
+
+              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
+                Onde rivais emprestam peças e código antes da final
               </h3>
-              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
-                Em qualquer torneio FIRST, o ambiente dos boxes (Pits) é o retrato vivo do <strong>Gracious Professionalism</strong>. Se um robô quebra seu eixo principal ou queima um controlador de motor nas semifinais, um anúncio é feito pelos alto-falantes e, em segundos, equipes adversárias correm com peças sobressalentes, ferramentas e programadores para colocar o rival de volta na quadra a tempo.
+
+              <p className="text-sm text-gray-300 leading-relaxed font-normal">
+                Em qualquer torneio FIRST, o ambiente dos boxes (Pits) é o retrato vivo do <strong>Gracious Professionalism®</strong>. Se um robô quebra seu eixo principal ou queima um controlador de motor nas semifinais, um anúncio é feito pelos alto-falantes e, em segundos, equipes adversárias correm com peças sobressalentes, ferramentas e programadores para colocar o rival de volta na quadra a tempo.
               </p>
             </div>
 
-            <div className="lg:col-span-4 p-5 bg-gray-900 border border-gray-800 space-y-3">
-              <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-amber-400 uppercase tracking-wider">
-                <Award className="w-3.5 h-3.5" />
+            <div className="lg:col-span-4 p-5 bg-white/5 border border-white/10 rounded-xl space-y-3">
+              <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-amber-400 uppercase tracking-wider">
+                <Award className="w-4 h-4" />
                 <span>O QUE OS JURADOS BUSCAM</span>
               </div>
-              <ul className="text-xs text-gray-300 space-y-2 font-medium">
-                <li className="flex items-center gap-2">
-                  <span className="w-1 h-1 bg-amber-400" />
-                  <span>Clareza técnica ao defender escolhas de design</span>
+              <ul className="text-xs text-gray-300 space-y-2 font-normal">
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-1.5" />
+                  <span>Clareza técnica ao defender escolhas no CAD e na arena</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1 h-1 bg-amber-400" />
-                  <span>Protagonismo 100% dos estudantes (não dos mentores)</span>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-1.5" />
+                  <span>Protagonismo genuíno dos estudantes nas decisões</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1 h-1 bg-amber-400" />
-                  <span>Ações reais que disseminaram STEM em escolas públicas</span>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-1.5" />
+                  <span>Projetos sociais que disseminaram STEAM na comunidade</span>
                 </li>
               </ul>
             </div>
