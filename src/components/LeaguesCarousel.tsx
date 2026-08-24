@@ -6,6 +6,7 @@ import { LeagueId } from '../types/first';
 
 interface LeaguesCarouselProps {
   onOpenGlossary?: (term?: string) => void;
+  selectedLeague?: LeagueId | null;
 }
 
 const LEAGUES_CONFIG: Array<{
@@ -83,7 +84,7 @@ const getSpecs = (league: (typeof LEAGUES_DATA)[string]) => [
   { label: 'Partida', value: league.allianceFormat },
 ];
 
-export const LeaguesCarousel: React.FC<LeaguesCarouselProps> = ({ onOpenGlossary }) => {
+export const LeaguesCarousel: React.FC<LeaguesCarouselProps> = ({ onOpenGlossary, selectedLeague }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const touchStartX = useRef<number | null>(null);
@@ -108,6 +109,12 @@ export const LeaguesCarousel: React.FC<LeaguesCarouselProps> = ({ onOpenGlossary
     setDirection(1);
     setCurrentIndex((prev) => (prev === LEAGUES_CONFIG.length - 1 ? 0 : prev + 1));
   }, []);
+
+  useEffect(() => {
+    if (!selectedLeague) return;
+    const index = LEAGUES_CONFIG.findIndex((league) => league.key === selectedLeague);
+    if (index >= 0) goToSlide(index);
+  }, [selectedLeague, goToSlide]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -142,7 +149,6 @@ export const LeaguesCarousel: React.FC<LeaguesCarouselProps> = ({ onOpenGlossary
   return (
     <section id="ligas" className="scroll-mt-24 lg:scroll-mt-28 bg-[#F7F7F5] relative border-b border-gray-200 overflow-hidden select-none">
       <div className="absolute inset-0 pointer-events-none opacity-60 bg-[radial-gradient(circle_at_85%_10%,rgba(0,102,179,0.08),transparent_28%)]" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-10 lg:mb-14">
           <div className="lg:col-span-8">
