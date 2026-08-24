@@ -3,27 +3,27 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { STUDENT_JOURNEY_STAGES } from '../data/firstData';
 import { ArrowRight, GraduationCap, Sparkles, TrendingUp } from 'lucide-react';
 
-// Each stage uses a distinct image already proven useful elsewhere in the project.
+// Each stage uses a fresh, distinct official FIRST image selected specifically for the stage narrative.
 const JOURNEY_IMAGES = [
   'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0312.jpg?height=1260&name=20230420_bm_0312.jpg&width=1890',
-  'https://community.firstinspires.org/hubfs/preview%20event.jpg',
-  'https://community.firstinspires.org/hubfs/blog/frc/2025-robot-rules-preview-for-2026.jpg',
-  'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0446_1.webp?name=20230420_bm_0446_1.webp&width=2000',
+  'https://www.firstinspires.org/hs-fs/hubfs/frc_getstarted_1260hero.webp?height=840&name=frc_getstarted_1260hero.webp&width=1260',
+  'https://community.firstinspires.org/hs-fs/hubfs/undefined-Mar-09-2026-05-09-00-4625-PM.png?height=830&name=undefined-Mar-09-2026-05-09-00-4625-PM.png&width=638',
 ];
 
-// Unique fallbacks prevent multiple stages from collapsing to the same visual if a host image fails.
+// Distinct fallbacks keep each stage visually unique even if an external image fails.
 const JOURNEY_FALLBACK_IMAGES = [
   'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0319.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0125_1.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/frc_crowd_1jc2110_1.jpg?width=1400',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0312.jpg?width=1200',
+  'https://www.firstinspires.org/hs-fs/hubfs/image-library/web/20250417dan1701-1260x840.webp?height=840&name=20250417dan1701-1260x840.webp&width=1260',
+  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0125_1.webp?name=20230420_bm_0125_1.webp&width=2000',
+  'https://community.firstinspires.org/hs-fs/hubfs/undefined-Mar-09-2026-05-08-59-9090-PM.png?height=706&name=undefined-Mar-09-2026-05-08-59-9090-PM.png&width=684',
 ];
 
 const JOURNEY_IMAGE_ALTS = [
   'Estudantes participando de uma experiência FIRST LEGO League com robótica educacional.',
-  'Arena e equipes da FIRST Tech Challenge durante uma experiência de engenharia aplicada.',
-  'Equipe FIRST Robotics Competition trabalhando com um robô de grande porte e engenharia avançada.',
-  'Comunidade reunida no FIRST Championship, representando a continuidade para universidade, carreira e mentoria.',
+  'Estudantes da FIRST Tech Challenge trabalhando diretamente na montagem e elétrica de um robô.',
+  'Estudante da FIRST Robotics Competition trabalhando em um robô industrial de grande porte durante a construção.',
+  'Alumni brasileira da FIRST atuando em inspeção de robô, conectando universidade, carreira, voluntariado e mentoria.',
 ];
 
 export const StudentJourney: React.FC = () => {
