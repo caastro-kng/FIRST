@@ -34,7 +34,13 @@ const PageLoadingFallback: React.FC = () => (
 
 export default function App() {
   const [glossaryOpen, setGlossaryOpen] = useState(false);
+  const [glossaryQuery, setGlossaryQuery] = useState('');
   const [quizOpen, setQuizOpen] = useState(false);
+
+  const openGlossary = (query = '') => {
+    setGlossaryQuery(query);
+    setGlossaryOpen(true);
+  };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -42,17 +48,21 @@ export default function App() {
       const isTyping = target === 'INPUT' || target === 'TEXTAREA' || target === 'SELECT';
 
       if (!isTyping && (event.key === 'g' || event.key === 'G')) {
-        setGlossaryOpen((open) => !open);
+        if (glossaryOpen) {
+          setGlossaryOpen(false);
+        } else {
+          openGlossary();
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [glossaryOpen]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FBFBFB] text-[#111827] antialiased selection:bg-[#0066B3] selection:text-white">
-      <Header onOpenGlossary={() => setGlossaryOpen(true)} />
+      <Header onOpenGlossary={() => openGlossary()} />
 
       <main className="flex-1">
         <Hero onOpenQuiz={() => setQuizOpen(true)} />
@@ -60,7 +70,7 @@ export default function App() {
 
         <Suspense fallback={<PageLoadingFallback />}>
           <ImpactStats />
-          <LeaguesCarousel />
+          <LeaguesCarousel onOpenGlossary={openGlossary} />
           <ComparisonMatrix />
           <HowItWorks />
           <TeamCulture />
@@ -84,7 +94,7 @@ export default function App() {
 
       {glossaryOpen && (
         <Suspense fallback={null}>
-          <GlossaryModal isOpen={glossaryOpen} onClose={() => setGlossaryOpen(false)} />
+          <GlossaryModal isOpen={glossaryOpen} initialSearch={glossaryQuery} onClose={() => setGlossaryOpen(false)} />
         </Suspense>
       )}
     </div>
