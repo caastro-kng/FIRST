@@ -6,6 +6,7 @@ import { Compass, RotateCcw, ArrowRight, Sparkles, X, BarChart3 } from 'lucide-r
 interface LeagueFinderQuizProps {
   isOpen: boolean;
   onClose: () => void;
+  onExploreLeague: (league: LeagueId) => void;
 }
 
 const LEAGUE_META: Record<LeagueId, { label: string; accent: string; soft: string }> = {
@@ -14,7 +15,7 @@ const LEAGUE_META: Record<LeagueId, { label: string; accent: string; soft: strin
   frc: { label: 'FRC', accent: '#ED1C24', soft: '#FFF0F1' },
 };
 
-export const LeagueFinderQuiz: React.FC<LeagueFinderQuizProps> = ({ isOpen, onClose }) => {
+export const LeagueFinderQuiz: React.FC<LeagueFinderQuizProps> = ({ isOpen, onClose, onExploreLeague }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [scores, setScores] = useState({ fll: 0, ftc: 0, frc: 0 });
   const [result, setResult] = useState<LeagueId | null>(null);
@@ -146,7 +147,7 @@ export const LeagueFinderQuiz: React.FC<LeagueFinderQuizProps> = ({ isOpen, onCl
             </div>
           </div>
         ) : (
-          recommendedLeague && recommendedMeta && (
+          recommendedLeague && recommendedMeta && result && (
             <div className="space-y-5 text-center sm:text-left" aria-live="polite">
               <div
                 className="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider rounded-full border"
@@ -197,15 +198,15 @@ export const LeagueFinderQuiz: React.FC<LeagueFinderQuizProps> = ({ isOpen, onCl
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-2.5 pt-2">
-                <a
-                  href="#ligas"
-                  onClick={onClose}
+                <button
+                  type="button"
+                  onClick={() => onExploreLeague(result)}
                   className="w-full sm:w-auto flex-1 flex items-center justify-center gap-2 py-3 px-5 text-xs font-mono font-bold uppercase tracking-wider text-white rounded-xl transition-all shadow-2xs"
                   style={{ backgroundColor: recommendedMeta.accent }}
                 >
                   <span>Explorar {recommendedLeague.acronym} nas ligas</span>
                   <ArrowRight className="w-4 h-4" />
-                </a>
+                </button>
 
                 <button
                   type="button"
