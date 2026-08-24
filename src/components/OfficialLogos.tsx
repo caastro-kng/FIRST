@@ -1,6 +1,6 @@
 import React from 'react';
-import firstLogoUrl from '../assets/first-logo.svg';
-import senaiLogoUrl from '../assets/senai-logo.svg';
+import firstLogoUrl from '../../brands/first-logo.jpg';
+import senaiLogoUrl from '../../brands/senai-logo.png';
 
 /**
  * Official FIRST Logo (Authentic Asset)
