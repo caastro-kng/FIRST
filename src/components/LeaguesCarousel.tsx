@@ -1,8 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, Cpu, Layers3, Trophy } from 'lucide-react';
+import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, Cpu, Layers3, Trophy } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { LEAGUES_DATA } from '../data/firstData';
 import { LeagueId } from '../types/first';
+
+interface LeaguesCarouselProps {
+  onOpenGlossary?: (term?: string) => void;
+}
 
 const LEAGUES_CONFIG: Array<{
   key: LeagueId;
@@ -16,6 +20,7 @@ const LEAGUES_CONFIG: Array<{
   progression: string;
   icon: React.ComponentType<{ className?: string }>;
   focus: string[];
+  glossaryTerms: string[];
   photoCaption: string;
 }> = [
   {
@@ -30,6 +35,7 @@ const LEAGUES_CONFIG: Array<{
     progression: 'LEGO',
     icon: Layers3,
     focus: ['Missões com robô LEGO', 'Projeto de inovação', 'Design e estratégia'],
+    glossaryTerms: ['Autonomous'],
     photoCaption: 'LEGO® EDUCATION • AUTONOMIA • DESCOBERTA',
   },
   {
@@ -44,6 +50,7 @@ const LEAGUES_CONFIG: Array<{
     progression: 'METAL',
     icon: Cpu,
     focus: ['Visão computacional', 'Portfólio de engenharia', 'Sistemas mecânicos reais'],
+    glossaryTerms: ['AprilTag', 'Control Hub'],
     photoCaption: 'ALUMÍNIO • MOTORES 12V • JAVA • ESTRATÉGIA',
   },
   {
@@ -58,6 +65,7 @@ const LEAGUES_CONFIG: Array<{
     progression: 'ARENA',
     icon: Trophy,
     focus: ['Swerve Drive 360°', 'Controle industrial', 'Impacto e alta velocidade'],
+    glossaryTerms: ['Swerve Drive', 'Scouting', 'Alliance Selection'],
     photoCaption: 'SWERVE • WPILIB • ALIANÇAS 3V3 • ALTA POTÊNCIA',
   },
 ];
@@ -75,7 +83,7 @@ const getSpecs = (league: (typeof LEAGUES_DATA)[string]) => [
   { label: 'Partida', value: league.allianceFormat },
 ];
 
-export const LeaguesCarousel: React.FC = () => {
+export const LeaguesCarousel: React.FC<LeaguesCarouselProps> = ({ onOpenGlossary }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const touchStartX = useRef<number | null>(null);
@@ -83,7 +91,6 @@ export const LeaguesCarousel: React.FC = () => {
 
   const activeConfig = LEAGUES_CONFIG[currentIndex];
   const activeData = LEAGUES_DATA[activeConfig.key];
-  const ActiveIcon = activeConfig.icon;
   const specs = getSpecs(activeData);
 
   const goToSlide = useCallback((index: number) => {
@@ -215,12 +222,34 @@ export const LeaguesCarousel: React.FC = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="mb-7">
+                  <div className="mb-5">
                     <div className="text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-gray-400 mb-3">O QUE MUDA NESTA ETAPA</div>
                     <div className="flex flex-wrap gap-2">
                       {activeConfig.focus.map((item) => <span key={item} className="px-3 py-2 rounded-full text-[11px] font-bold border" style={{ backgroundColor: activeConfig.accentSoft, borderColor: `${activeConfig.accentColor}2A`, color: activeConfig.accentText }}>{item}</span>)}
                     </div>
                   </div>
+
+                  {onOpenGlossary && (
+                    <div className="mb-7 rounded-2xl border border-gray-200 bg-gray-50/70 p-4">
+                      <div className="mb-2 flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-gray-400">
+                        <BookOpen className="h-3.5 w-3.5" /> TERMOS PARA EXPLORAR
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {activeConfig.glossaryTerms.map((term) => (
+                          <button
+                            key={term}
+                            type="button"
+                            onClick={() => onOpenGlossary(term)}
+                            className="rounded-full border border-gray-200 bg-white px-3 py-2 text-[11px] font-bold text-gray-700 transition-colors hover:border-[#0066B3]/40 hover:text-[#0066B3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066B3]/30"
+                            aria-label={`Abrir definição de ${term} no glossário`}
+                          >
+                            {term}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   <button type="button" onClick={nextSlide} className="group inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-gray-950 hover:gap-3 transition-all">
                     {currentIndex === LEAGUES_CONFIG.length - 1 ? 'Voltar ao início' : 'Próxima escala'}<ArrowRight className="w-4 h-4" />
                   </button>
