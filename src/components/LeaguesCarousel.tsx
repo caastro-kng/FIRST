@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Box, Cpu, Sparkles, Trophy, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight, Cpu, Layers3, Trophy } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import { LEAGUES_DATA } from '../data/firstData';
 
 const LEAGUE_KEYS = ['fll', 'ftc', 'frc'] as const;
@@ -12,141 +12,98 @@ const LEAGUES_CONFIG = [
     indexStr: '01 / 03',
     shortName: 'FLL',
     name: 'FIRST LEGO League',
-    subtitle: '9 A 16 ANOS • INICIAÇÃO CIENTÍFICA',
-    headlinePrefix: 'ONDE TUDO',
-    headlineHighlight: 'COMEÇA.',
+    eyebrow: '9 A 16 ANOS • PRIMEIRO CONTATO',
+    headlinePrefix: 'DA IDEIA AO',
+    headlineHighlight: 'PRIMEIRO ROBÔ.',
+    intro: 'LEGO, criatividade e método científico em uma porta de entrada acessível para o universo da engenharia.',
     accentColor: '#FF5F00',
-    badgeBg: 'bg-amber-100',
-    badgeText: 'text-amber-900',
-    activeTabClass: 'text-amber-600 border-amber-500 bg-amber-50/70',
+    accentSoft: '#FFF3E8',
+    accentText: '#9A3A00',
+    progression: 'LEGO',
+    icon: Layers3,
     specs: [
-      { label: 'Robô', value: '~1,5 kg (LEGO)' },
-      { label: 'Controle', value: '100% Autônomo' },
-      { label: 'Software', value: 'Scratch & Python' },
-      { label: 'Duração', value: '2m30s na Mesa' },
+      { label: 'Robô', value: '~1,5 kg' },
+      { label: 'Controle', value: 'Autônomo' },
+      { label: 'Código', value: 'Scratch / Python' },
+      { label: 'Round', value: '2m30s' },
     ],
-    modules: [
-      {
-        title: 'Robô LEGO & Missões',
-        desc: 'Navegação autônoma pelo tapete com giroscópios e sensores de cor em 2min30s.',
-      },
-      {
-        title: 'Projeto de Inovação',
-        desc: 'Identificação de um problema social ou comunitário e criação de uma solução inédita.',
-      },
-      {
-        title: 'Design do Robô',
-        desc: 'Apresentação técnica sobre modularidade mecânica, engrenagens e algoritmos.',
-      },
-      {
-        title: 'Core Values',
-        desc: 'Demonstração contínua de trabalho em equipe, respeito mútuo e inclusão.',
-      },
+    focus: [
+      'Missões com robô LEGO',
+      'Projeto de inovação',
+      'Design e estratégia',
     ],
-    photoCaption: 'KITS OFICIAIS LEGO® EDUCATION SPIKE PRIME',
-    layout: 'text-left' as const,
+    photoCaption: 'LEGO® EDUCATION • AUTONOMIA • DESCOBERTA',
   },
   {
     key: 'ftc' as LeagueKey,
     indexStr: '02 / 03',
     shortName: 'FTC',
     name: 'FIRST Tech Challenge',
-    subtitle: '12 A 18 ANOS • ENGENHARIA APLICADA',
-    headlinePrefix: 'QUANDO A',
-    headlineHighlight: 'ENGENHARIA EVOLUI.',
+    eyebrow: '12 A 18 ANOS • ENGENHARIA APLICADA',
+    headlinePrefix: 'QUANDO O PROJETO',
+    headlineHighlight: 'VIRA MÁQUINA.',
+    intro: 'Metal, eletrônica e software entram em cena para transformar conceitos de engenharia em desempenho real de arena.',
     accentColor: '#0066B3',
-    badgeBg: 'bg-blue-100',
-    badgeText: 'text-blue-900',
-    activeTabClass: 'text-[#0066B3] border-[#0066B3] bg-blue-50/70',
+    accentSoft: '#EAF5FF',
+    accentText: '#004D87',
+    progression: 'METAL',
+    icon: Cpu,
     specs: [
-      { label: 'Robô', value: 'Até 19 kg (Caixa 18")' },
-      { label: 'Controle', value: '2 Gamepads + 30s Aut.' },
-      { label: 'Software', value: 'Java / OnBot Java' },
-      { label: 'Arena', value: 'Alianças 2v2 (3,6m)' },
+      { label: 'Robô', value: 'Até 19 kg' },
+      { label: 'Controle', value: '2 gamepads' },
+      { label: 'Código', value: 'Java' },
+      { label: 'Arena', value: '2 × 2' },
     ],
-    modules: [
-      {
-        title: 'Visão Computacional',
-        desc: 'Detecção de marcadores AprilTags via câmeras USB para localização autônoma de alta precisão.',
-      },
-      {
-        title: 'Portfólio de Engenharia',
-        desc: 'Documento técnico detalhando iterações de CAD, física dos atuadores e cálculos de redução.',
-      },
-      {
-        title: 'REV Control Hub',
-        desc: 'Computador de bordo integrado baseado em Android com interfaces para 4 motores e 6 servos.',
-      },
-      {
-        title: 'Prêmio Inspire',
-        desc: 'Reconhecimento máximo para o time que combina excelência mecânica e impacto social.',
-      },
+    focus: [
+      'Visão computacional',
+      'Portfólio de engenharia',
+      'Sistemas mecânicos reais',
     ],
-    photoCaption: 'CHASSIS METÁLICOS • MOTORES 12V • JAVA NATIVO',
-    layout: 'image-left' as const,
+    photoCaption: 'ALUMÍNIO • MOTORES 12V • JAVA • ESTRATÉGIA',
   },
   {
     key: 'frc' as LeagueKey,
     indexStr: '03 / 03',
     shortName: 'FRC',
     name: 'FIRST Robotics Competition',
-    subtitle: '14 A 18 ANOS • ESCALA INDUSTRIAL DE ARENA',
-    headlinePrefix: 'ROBÓTICA EM',
+    eyebrow: '14 A 18 ANOS • ESCALA INDUSTRIAL',
+    headlinePrefix: 'ENGENHARIA EM',
     headlineHighlight: 'ESCALA DE ARENA.',
+    intro: 'Robôs industriais, alianças 3 contra 3 e uma atmosfera que aproxima engenharia, estratégia e esporte.',
     accentColor: '#ED1C24',
-    badgeBg: 'bg-red-100',
-    badgeText: 'text-red-900',
-    activeTabClass: 'text-[#ED1C24] border-[#ED1C24] bg-red-50/70',
+    accentSoft: '#FFF0F1',
+    accentText: '#A20F15',
+    progression: 'ARENA',
+    icon: Trophy,
     specs: [
-      { label: 'Peso Máximo', value: '56,7 kg (125 lbs)' },
-      { label: 'Potência', value: '+3.000W Brushless' },
-      { label: 'Software', value: 'WPILib / Java / C++' },
-      { label: 'Arena', value: '16,5m × 8,2m (Quadra)' },
+      { label: 'Peso', value: '56,7 kg' },
+      { label: 'Potência', value: '+3.000 W' },
+      { label: 'Código', value: 'WPILib' },
+      { label: 'Arena', value: '3 × 3' },
     ],
-    modules: [
-      {
-        title: 'roboRIO 2.0 & WPILib',
-        desc: 'Computador de bordo militar/industrial da National Instruments rodando Linux Real-Time.',
-      },
-      {
-        title: 'Swerve Drive 360°',
-        desc: '4 módulos de tração independente onde cada roda gira e traciona em qualquer vetor cartesiano.',
-      },
-      {
-        title: 'Motores Brushless 400W',
-        desc: 'Motores industriais de altíssimo torque (Kraken X60, Falcon 500) operados por barramentos CAN.',
-      },
-      {
-        title: 'FIRST Impact Award',
-        desc: 'O prêmio de maior prestígio de toda a FIRST, honrando a equipe com maior legado cultural.',
-      },
+    focus: [
+      'Swerve Drive 360°',
+      'Controle industrial',
+      'Impacto e alta velocidade',
     ],
-    photoCaption: 'ESPORTE SUPREMO DA MENTE • MÁQUINAS INDUSTRIAIS',
-    layout: 'cinematic' as const,
+    photoCaption: 'SWERVE • WPILIB • ALIANÇAS 3V3 • ALTA POTÊNCIA',
   },
 ];
 
-// Editorial slide motion variants with cubic-bezier(0.16, 1, 0.3, 1)
 const slideVariants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? 36 : -36,
+    x: direction > 0 ? 48 : -48,
     opacity: 0,
   }),
   center: {
     x: 0,
     opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: [0.16, 1, 0.3, 1],
-    },
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
   },
   exit: (direction: number) => ({
-    x: direction > 0 ? -36 : 36,
+    x: direction > 0 ? -48 : 48,
     opacity: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.16, 1, 0.3, 1],
-    },
+    transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
   }),
 };
 
@@ -155,16 +112,19 @@ export const LeaguesCarousel: React.FC = () => {
   const [direction, setDirection] = useState(1);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
-  const carouselContainerRef = useRef<HTMLDivElement>(null);
 
   const activeConfig = LEAGUES_CONFIG[currentIndex];
   const activeData = LEAGUES_DATA[activeConfig.key];
+  const ActiveIcon = activeConfig.icon;
 
-  const goToSlide = useCallback((index: number) => {
-    if (index === currentIndex) return;
-    setDirection(index > currentIndex ? 1 : -1);
-    setCurrentIndex(index);
-  }, [currentIndex]);
+  const goToSlide = useCallback(
+    (index: number) => {
+      if (index === currentIndex) return;
+      setDirection(index > currentIndex ? 1 : -1);
+      setCurrentIndex(index);
+    },
+    [currentIndex],
+  );
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
@@ -176,50 +136,38 @@ export const LeaguesCarousel: React.FC = () => {
     setCurrentIndex((prev) => (prev === LEAGUES_CONFIG.length - 1 ? 0 : prev + 1));
   }, []);
 
-  // Keyboard navigation
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Only react if the carousel or section is in view or focused
-      const el = document.getElementById('ligas');
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const section = document.getElementById('ligas');
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
       const inView = rect.top < window.innerHeight && rect.bottom > 0;
       if (!inView) return;
 
-      if (e.key === 'ArrowLeft') {
-        prevSlide();
-      } else if (e.key === 'ArrowRight') {
-        nextSlide();
-      }
+      if (event.key === 'ArrowLeft') prevSlide();
+      if (event.key === 'ArrowRight') nextSlide();
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [prevSlide, nextSlide]);
+  }, [nextSlide, prevSlide]);
 
-  // Touch Swipe Handlers (Instagram mobile swipe feel)
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.targetTouches[0].clientX;
+  const handleTouchStart = (event: React.TouchEvent) => {
+    touchStartX.current = event.targetTouches[0].clientX;
     touchEndX.current = null;
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.targetTouches[0].clientX;
+  const handleTouchMove = (event: React.TouchEvent) => {
+    touchEndX.current = event.targetTouches[0].clientX;
   };
 
   const handleTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const distance = touchStartX.current - touchEndX.current;
-    const isSwipe = Math.abs(distance) > 45;
+    if (touchStartX.current === null || touchEndX.current === null) return;
 
-    if (isSwipe) {
-      if (distance > 0) {
-        // Swiped left -> Next slide
-        nextSlide();
-      } else {
-        // Swiped right -> Previous slide
-        prevSlide();
-      }
+    const distance = touchStartX.current - touchEndX.current;
+    if (Math.abs(distance) > 45) {
+      distance > 0 ? nextSlide() : prevSlide();
     }
 
     touchStartX.current = null;
@@ -229,100 +177,88 @@ export const LeaguesCarousel: React.FC = () => {
   return (
     <section
       id="ligas"
-      className="scroll-mt-24 lg:scroll-mt-28 py-20 lg:py-28 bg-[#FBFBFB] relative border-b border-gray-200 overflow-hidden select-none"
+      className="scroll-mt-24 lg:scroll-mt-28 bg-[#F7F7F5] relative border-b border-gray-200 overflow-hidden select-none"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        
-        {/* Section Header: Unified Introduction */}
-        <div className="max-w-3xl mb-10 sm:mb-14 space-y-3">
-          <div className="inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#0066B3]">
-            <span className="w-1.5 h-1.5 bg-[#0066B3] rounded-full" />
-            <span>03 / ECOSSISTEMA FIRST • CARROSSEL EDITORIAL</span>
+      <div className="absolute inset-0 pointer-events-none opacity-60 bg-[radial-gradient(circle_at_85%_10%,rgba(0,102,179,0.08),transparent_28%)]" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-10 lg:mb-14">
+          <div className="lg:col-span-8">
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-[0.18em] text-[#0066B3] mb-4">
+              <span className="w-1.5 h-1.5 bg-[#0066B3] rounded-full" />
+              03 / ECOSSISTEMA FIRST
+            </div>
+
+            <h2 className="text-[2.5rem] sm:text-5xl lg:text-6xl font-black text-gray-950 tracking-[-0.04em] uppercase leading-[0.94] max-w-4xl">
+              UMA JORNADA.
+              <span className="block text-[#0066B3]">TRÊS ESCALAS DE ENGENHARIA.</span>
+            </h2>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-gray-950 tracking-tight uppercase leading-[1.08]">
-            TRÊS LIGAS. <br />
-            <span className="text-[#0066B3]">UMA MESMA JORNADA.</span>
-          </h2>
-
-          <p className="text-sm sm:text-base text-gray-600 font-normal leading-relaxed max-w-2xl">
-            Navegue pelos três capítulos da evolução tecnológica FIRST: da iniciação lúdica com LEGO 
-            à engenharia em escala de arena de alta potência.
-          </p>
+          <div className="lg:col-span-4 lg:pb-1">
+            <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-md lg:ml-auto">
+              Do primeiro protótipo em LEGO a máquinas de escala industrial: a complexidade cresce, mas a lógica permanece a mesma — imaginar, construir, testar e competir.
+            </p>
+          </div>
         </div>
 
-        {/* Carousel Top Navigation Bar: Direct League Tabs + Progress Track */}
-        <div className="mb-8 border-b border-gray-200/80 pb-4 flex flex-wrap items-center justify-between gap-4">
-          
-          {/* Direct League Switcher Tabs (FLL / FTC / FRC) */}
-          <div className="flex items-center gap-2 sm:gap-3" role="tablist" aria-label="Ligas FIRST">
-            {LEAGUES_CONFIG.map((league, idx) => {
-              const isActive = idx === currentIndex;
+        <div className="mb-6 lg:mb-8">
+          <div className="grid grid-cols-3 border border-gray-200 bg-white rounded-2xl overflow-hidden shadow-sm" role="tablist" aria-label="Ligas FIRST">
+            {LEAGUES_CONFIG.map((league, index) => {
+              const isActive = index === currentIndex;
+              const Icon = league.icon;
+
               return (
                 <button
                   key={league.key}
+                  type="button"
                   role="tab"
-                  id={`tab-league-${league.key}`}
                   aria-selected={isActive}
                   aria-controls={`slide-league-${league.key}`}
-                  onClick={() => goToSlide(idx)}
-                  className={`btn-hover px-4 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 border ${
-                    isActive
-                      ? `${league.activeTabClass} shadow-2xs font-black`
-                      : 'text-gray-500 hover:text-gray-900 bg-white border-gray-200 hover:border-gray-300'
+                  onClick={() => goToSlide(index)}
+                  className={`relative px-3 sm:px-5 py-4 sm:py-5 text-left transition-all border-r last:border-r-0 border-gray-200 ${
+                    isActive ? 'bg-gray-950 text-white' : 'bg-white text-gray-500 hover:bg-gray-50 hover:text-gray-950'
                   }`}
                 >
-                  <span
-                    className="w-2 h-2 rounded-full transition-all"
-                    style={{ backgroundColor: isActive ? league.accentColor : '#D1D5DB' }}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-1 transition-opacity"
+                    style={{ backgroundColor: league.accentColor, opacity: isActive ? 1 : 0 }}
                   />
-                  <span>{league.shortName}</span>
+
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div
+                      className="hidden sm:flex w-9 h-9 rounded-full items-center justify-center shrink-0"
+                      style={{
+                        backgroundColor: isActive ? `${league.accentColor}22` : league.accentSoft,
+                        color: league.accentColor,
+                      }}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </div>
+
+                    <div className="min-w-0">
+                      <div className="text-[10px] font-mono uppercase tracking-wider opacity-60">{league.indexStr}</div>
+                      <div className="text-sm sm:text-base font-black uppercase tracking-tight">{league.shortName}</div>
+                      <div className="hidden md:block text-[10px] font-mono uppercase tracking-wide opacity-60 mt-0.5">
+                        {league.progression}
+                      </div>
+                    </div>
+                  </div>
                 </button>
               );
             })}
           </div>
-
-          {/* Minimalist Counter & Navigation Arrow Controls */}
-          <div className="flex items-center gap-4">
-            <span className="text-xs font-mono font-bold text-gray-500 uppercase tracking-widest">
-              {activeConfig.indexStr}
-            </span>
-
-            <div className="flex items-center gap-1">
-              <button
-                onClick={prevSlide}
-                id="carousel-arrow-prev"
-                aria-label="Ver liga anterior"
-                className="btn-hover p-2 rounded-lg text-gray-600 hover:text-gray-950 hover:bg-gray-100 active:bg-gray-200 transition-colors cursor-pointer"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={nextSlide}
-                id="carousel-arrow-next"
-                aria-label="Ver próxima liga"
-                className="btn-hover p-2 rounded-lg text-gray-600 hover:text-gray-950 hover:bg-gray-100 active:bg-gray-200 transition-colors cursor-pointer"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-
         </div>
 
-        {/* ========================================================================= */}
-        {/* CAROUSEL SLIDE CONTAINER (Swipeable, Animated, Stable Height) */}
-        {/* ========================================================================= */}
         <div
-          ref={carouselContainerRef}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className="relative min-h-[640px] sm:min-h-[580px] lg:min-h-[520px] transition-all"
           id={`slide-league-${activeConfig.key}`}
           role="region"
           aria-roledescription="carousel"
-          aria-label={`Slide ${activeConfig.indexStr}: ${activeConfig.name}`}
+          aria-label={`${activeConfig.name} — ${activeConfig.indexStr}`}
+          className="relative"
         >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
@@ -332,357 +268,148 @@ export const LeaguesCarousel: React.FC = () => {
               initial="enter"
               animate="center"
               exit="exit"
-              className="w-full"
+              className="grid grid-cols-1 lg:grid-cols-12 bg-white border border-gray-200 rounded-[1.75rem] overflow-hidden shadow-[0_22px_70px_rgba(17,24,39,0.10)]"
             >
-              
-              {/* ================================================================= */}
-              {/* SLIDE TYPE A: FLL (Text Left, Photo Right) */}
-              {/* ================================================================= */}
-              {activeConfig.key === 'fll' && (
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                  
-                  {/* Left Narrative */}
-                  <div className="lg:col-span-7 space-y-6">
-                    
-                    <div className="flex items-center gap-3">
-                      <span className={`px-3 py-1 ${activeConfig.badgeBg} ${activeConfig.badgeText} text-[11px] font-mono font-bold uppercase rounded-full tracking-wider`}>
-                        {activeConfig.indexStr} • {activeConfig.name}
-                      </span>
-                      <span className="text-xs font-mono text-gray-500 uppercase">
-                        {activeConfig.subtitle}
-                      </span>
-                    </div>
+              <div className="lg:col-span-7 relative min-h-[360px] sm:min-h-[480px] lg:min-h-[620px] bg-gray-950 overflow-hidden">
+                <motion.img
+                  src={activeData.imageUrl}
+                  alt={activeData.name}
+                  initial={{ scale: 1.06 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
 
-                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-950 uppercase tracking-tight leading-tight">
-                      {activeConfig.headlinePrefix} <br />
-                      <span style={{ color: activeConfig.accentColor }}>{activeConfig.headlineHighlight}</span>
-                    </h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
 
-                    <p className="text-base text-gray-700 leading-relaxed font-normal">
-                      {activeData.description}
-                    </p>
-
-                    {/* Integrated Specs Strip */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-3.5 border-y border-gray-200 text-xs font-mono">
-                      {activeConfig.specs.map((s, idx) => (
-                        <div key={idx}>
-                          <div className="text-gray-400 text-[10px] uppercase">{s.label}</div>
-                          <div className="font-bold text-gray-900 mt-0.5">{s.value}</div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* 4 Pillars Modules */}
-                    <div className="space-y-2.5 pt-1">
-                      <div className="text-[10px] font-mono uppercase font-bold tracking-widest text-gray-500">
-                        ESTRUTURA DE AVALIAÇÃO OFICIAL (4 PILARES DE PESOS IGUAIS — 25% CADA)
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                        {activeConfig.modules.map((m, idx) => (
-                          <div key={idx} className="p-3.5 bg-white border border-gray-200/80 rounded-xl space-y-1 shadow-2xs">
-                            <div className="font-bold uppercase text-gray-900 flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: activeConfig.accentColor }} />
-                              {m.title}
-                            </div>
-                            <p className="text-gray-600 text-[11px] leading-relaxed">
-                              {m.desc}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
+                <div className="absolute top-5 left-5 sm:top-7 sm:left-7 flex items-center gap-2">
+                  <div
+                    className="px-3 py-1.5 rounded-full text-[10px] font-mono font-black uppercase tracking-[0.15em] text-white backdrop-blur-md border border-white/15"
+                    style={{ backgroundColor: `${activeConfig.accentColor}DD` }}
+                  >
+                    {activeConfig.shortName}
                   </div>
-
-                  {/* Right Photo */}
-                  <div className="lg:col-span-5">
-                    <div className="relative rounded-2xl overflow-hidden shadow-lg border border-gray-200/80 bg-gray-950 group">
-                      <motion.img
-                        src={activeData.imageUrl}
-                        alt={activeData.name}
-                        initial={{ scale: 1.02, opacity: 0.95 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                        className="w-full h-[360px] sm:h-[420px] object-cover"
-                        referrerPolicy="no-referrer"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      
-                      <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1 bg-amber-500/90 text-black text-[10px] font-mono font-bold uppercase rounded-full backdrop-blur-md">
-                          FLL CHALLENGE
-                        </span>
-                      </div>
-
-                      <div className="absolute bottom-4 left-4 right-4 p-4 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 text-white space-y-1">
-                        <p className="text-xs italic text-gray-200 leading-snug">
-                          "{activeData.quote}"
-                        </p>
-                        <div className="text-[10px] font-mono text-amber-400">
-                          {activeConfig.photoCaption}
-                        </div>
-                      </div>
-                    </div>
+                  <div className="px-3 py-1.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-[0.12em] text-white/85 bg-black/45 backdrop-blur-md border border-white/10">
+                    {activeConfig.progression}
                   </div>
-
                 </div>
-              )}
 
-              {/* ================================================================= */}
-              {/* SLIDE TYPE B: FTC (Photo Left, Text Right) */}
-              {/* ================================================================= */}
-              {activeConfig.key === 'ftc' && (
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                  
-                  {/* Left Photo (Inverted on Desktop for Rhythm) */}
-                  <div className="lg:col-span-5 order-2 lg:order-1">
-                    <div className="relative rounded-2xl overflow-hidden shadow-lg border border-gray-200/80 bg-gray-950 group">
-                      <motion.img
-                        src={activeData.imageUrl}
-                        alt={activeData.name}
-                        initial={{ scale: 1.02, opacity: 0.95 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                        className="w-full h-[360px] sm:h-[420px] object-cover"
-                        referrerPolicy="no-referrer"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      
-                      <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1 bg-[#0066B3] text-white text-[10px] font-mono font-bold uppercase rounded-full backdrop-blur-md">
-                          FTC CHALLENGE
-                        </span>
-                      </div>
-
-                      <div className="absolute bottom-4 left-4 right-4 p-4 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 text-white space-y-1">
-                        <p className="text-xs italic text-gray-200 leading-snug">
-                          "{activeData.quote}"
-                        </p>
-                        <div className="text-[10px] font-mono text-blue-400">
-                          {activeConfig.photoCaption}
-                        </div>
-                      </div>
-                    </div>
+                <div className="absolute left-5 right-5 bottom-5 sm:left-7 sm:right-7 sm:bottom-7 text-white">
+                  <div className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-[0.16em] mb-3" style={{ color: activeConfig.accentColor }}>
+                    {activeConfig.photoCaption}
                   </div>
-
-                  {/* Right Narrative */}
-                  <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
-                    
-                    <div className="flex items-center gap-3">
-                      <span className={`px-3 py-1 ${activeConfig.badgeBg} ${activeConfig.badgeText} text-[11px] font-mono font-bold uppercase rounded-full tracking-wider`}>
-                        {activeConfig.indexStr} • {activeConfig.name}
-                      </span>
-                      <span className="text-xs font-mono text-gray-500 uppercase">
-                        {activeConfig.subtitle}
-                      </span>
-                    </div>
-
-                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-950 uppercase tracking-tight leading-tight">
-                      {activeConfig.headlinePrefix} <br />
-                      <span style={{ color: activeConfig.accentColor }}>{activeConfig.headlineHighlight}</span>
-                    </h3>
-
-                    <p className="text-base text-gray-700 leading-relaxed font-normal">
-                      {activeData.description}
-                    </p>
-
-                    {/* Integrated Specs Strip */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-3.5 border-y border-gray-200 text-xs font-mono">
-                      {activeConfig.specs.map((s, idx) => (
-                        <div key={idx}>
-                          <div className="text-gray-400 text-[10px] uppercase">{s.label}</div>
-                          <div className="font-bold text-gray-900 mt-0.5">{s.value}</div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* 4 Pillars / Technologies */}
-                    <div className="space-y-2.5 pt-1">
-                      <div className="text-[10px] font-mono uppercase font-bold tracking-widest text-gray-500">
-                        TECNOLOGIAS & ENTREGAS DE ENGENHARIA FTC
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                        {activeConfig.modules.map((m, idx) => (
-                          <div key={idx} className="p-3.5 bg-white border border-gray-200/80 rounded-xl space-y-1 shadow-2xs">
-                            <div className="font-bold uppercase text-gray-900 flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: activeConfig.accentColor }} />
-                              {m.title}
-                            </div>
-                            <p className="text-gray-600 text-[11px] leading-relaxed">
-                              {m.desc}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                  </div>
-
+                  <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-white/90 max-w-2xl">
+                    “{activeData.quote}”
+                  </p>
                 </div>
-              )}
+              </div>
 
-              {/* ================================================================= */}
-              {/* SLIDE TYPE C: FRC (Arena Scale, High Impact Cinematic Frame) */}
-              {/* ================================================================= */}
-              {activeConfig.key === 'frc' && (
-                <div className="space-y-8">
-                  
-                  {/* Top Text & Narrative */}
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
-                    <div className="lg:col-span-8 space-y-3">
-                      <div className="flex items-center gap-3">
-                        <span className={`px-3 py-1 ${activeConfig.badgeBg} ${activeConfig.badgeText} text-[11px] font-mono font-bold uppercase rounded-full tracking-wider`}>
-                          {activeConfig.indexStr} • {activeConfig.name}
-                        </span>
-                        <span className="text-xs font-mono text-gray-500 uppercase">
-                          {activeConfig.subtitle}
-                        </span>
-                      </div>
-
-                      <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-950 uppercase tracking-tight leading-tight">
-                        {activeConfig.headlinePrefix} <br />
-                        <span style={{ color: activeConfig.accentColor }}>{activeConfig.headlineHighlight}</span>
-                      </h3>
-
-                      <p className="text-base text-gray-700 leading-relaxed font-normal max-w-3xl">
-                        {activeData.description}
-                      </p>
+              <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 xl:p-12 flex flex-col justify-between gap-8">
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-8">
+                    <div className="inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-[0.14em]" style={{ color: activeConfig.accentText }}>
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: activeConfig.accentColor }} />
+                      {activeConfig.eyebrow}
                     </div>
-
-                    {/* Integrated Quick Specs Box */}
-                    <div className="lg:col-span-4 grid grid-cols-2 gap-2.5 p-4 bg-white border border-gray-200/90 rounded-xl font-mono text-xs shadow-2xs">
-                      {activeConfig.specs.map((s, idx) => (
-                        <div key={idx} className="p-2 bg-gray-50 rounded-lg">
-                          <div className="text-gray-400 text-[9px] uppercase">{s.label}</div>
-                          <div className="font-bold text-gray-900 text-xs mt-0.5">{s.value}</div>
-                        </div>
-                      ))}
-                    </div>
+                    <span className="text-[10px] font-mono text-gray-400">{activeConfig.indexStr}</span>
                   </div>
 
-                  {/* Large Cinematic Frame */}
-                  <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-800 bg-gray-950 group">
-                    <motion.img
-                      src={activeData.imageUrl}
-                      alt={activeData.name}
-                      initial={{ scale: 1.02, opacity: 0.95 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                      className="w-full h-[320px] sm:h-[400px] lg:h-[440px] object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
+                  <h3 className="text-3xl sm:text-4xl xl:text-[3.25rem] font-black uppercase tracking-[-0.04em] leading-[0.96] text-gray-950 mb-5">
+                    {activeConfig.headlinePrefix}
+                    <span className="block" style={{ color: activeConfig.accentColor }}>
+                      {activeConfig.headlineHighlight}
+                    </span>
+                  </h3>
 
-                    {/* Top Telemetry */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-white/90">
-                      <div className="flex items-center gap-2 px-3 py-1.5 bg-black/70 backdrop-blur-md rounded-full border border-white/20">
-                        <span className="w-2 h-2 rounded-full bg-[#ED1C24] animate-ping" />
-                        <span className="font-bold uppercase tracking-wider text-[10px]">FRC ARENA OFICIAL • ALIANÇAS 3V3</span>
-                      </div>
-                      <div className="hidden sm:block px-3 py-1.5 bg-black/70 backdrop-blur-md rounded-full border border-white/20 text-[10px] uppercase">
-                        CONTROLE: WPILIB + JAVA / C++
-                      </div>
-                    </div>
+                  <p className="text-base text-gray-800 leading-relaxed font-medium mb-3">{activeConfig.intro}</p>
+                  <p className="text-sm text-gray-500 leading-relaxed">{activeData.description}</p>
+                </div>
 
-                    {/* Bottom Quote & Philosophy */}
-                    <div className="absolute bottom-4 left-4 right-4 p-5 bg-black/75 backdrop-blur-md rounded-xl border border-white/15 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <div className="space-y-1">
-                        <div className="text-[10px] font-mono text-[#ED1C24] font-bold uppercase tracking-widest">
-                          {activeConfig.photoCaption}
-                        </div>
-                        <p className="text-xs sm:text-sm italic text-gray-100 leading-snug">
-                          "{activeData.quote}"
-                        </p>
-                      </div>
-                      <div className="text-[10px] font-mono text-gray-400 whitespace-nowrap">
-                        56,7 KG • SWERVE DRIVE • LINUX RT
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 4 FRC Modules */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-                    {activeConfig.modules.map((m, idx) => (
-                      <div key={idx} className="p-4 bg-white border border-gray-200/80 rounded-xl space-y-1.5 shadow-2xs">
-                        <div className="font-bold uppercase text-gray-900 flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-[#ED1C24]" />
-                          <span>{m.title}</span>
-                        </div>
-                        <p className="text-gray-600 leading-relaxed text-[11px]">
-                          {m.desc}
-                        </p>
+                <div>
+                  <div className="grid grid-cols-2 gap-px bg-gray-200 border border-gray-200 rounded-2xl overflow-hidden mb-6">
+                    {activeConfig.specs.map((spec) => (
+                      <div key={spec.label} className="bg-gray-50 px-4 py-4">
+                        <div className="text-[9px] font-mono uppercase tracking-wider text-gray-400 mb-1">{spec.label}</div>
+                        <div className="text-sm font-black text-gray-950">{spec.value}</div>
                       </div>
                     ))}
                   </div>
 
-                </div>
-              )}
+                  <div className="mb-7">
+                    <div className="text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-gray-400 mb-3">O QUE MUDA NESTA ETAPA</div>
+                    <div className="flex flex-wrap gap-2">
+                      {activeConfig.focus.map((item) => (
+                        <span
+                          key={item}
+                          className="px-3 py-2 rounded-full text-[11px] font-bold border"
+                          style={{
+                            backgroundColor: activeConfig.accentSoft,
+                            borderColor: `${activeConfig.accentColor}2A`,
+                            color: activeConfig.accentText,
+                          }}
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
 
+                  <button
+                    type="button"
+                    onClick={nextSlide}
+                    className="group inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-gray-950 hover:gap-3 transition-all"
+                  >
+                    {currentIndex === LEAGUES_CONFIG.length - 1 ? 'Voltar ao início' : 'Próxima escala'}
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* ========================================================================= */}
-        {/* CAROUSEL BOTTOM FOOTER: Instagram-style Dots + Nav Hints */}
-        {/* ========================================================================= */}
-        <div className="mt-10 pt-6 border-t border-gray-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-          
-          {/* Navigation Arrows + Dots */}
-          <div className="flex items-center gap-4">
-            
+        <div className="mt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            {LEAGUES_CONFIG.map((league, index) => {
+              const isActive = index === currentIndex;
+              return (
+                <button
+                  key={league.key}
+                  type="button"
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Ver ${league.name}`}
+                  className="h-1.5 rounded-full transition-all"
+                  style={{
+                    width: isActive ? 34 : 10,
+                    backgroundColor: isActive ? league.accentColor : '#D1D5DB',
+                  }}
+                />
+              );
+            })}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="hidden sm:inline text-[10px] font-mono uppercase tracking-wider text-gray-400 mr-1">Use ← → para navegar</span>
             <button
+              type="button"
               onClick={prevSlide}
-              id="carousel-bottom-prev-btn"
-              aria-label="Ver liga anterior"
-              className="btn-hover p-2 text-gray-500 hover:text-gray-950 rounded-lg hover:bg-gray-100 cursor-pointer"
+              aria-label="Liga anterior"
+              className="w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-600 hover:text-gray-950 hover:border-gray-300 transition-colors flex items-center justify-center"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
-
-            {/* Instagram Style Clickable Indicator Dots (● ○ ○) */}
-            <div className="flex items-center gap-2" role="group" aria-label="Indicadores de slide do carrossel">
-              {LEAGUES_CONFIG.map((league, idx) => {
-                const isActive = idx === currentIndex;
-                return (
-                  <button
-                    key={league.key}
-                    onClick={() => goToSlide(idx)}
-                    id={`carousel-dot-${league.key}`}
-                    aria-label={`Ver ${league.shortName}`}
-                    className={`btn-hover transition-all rounded-full cursor-pointer ${
-                      isActive
-                        ? 'w-6 h-2 rounded-full'
-                        : 'w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-400'
-                    }`}
-                    style={{
-                      backgroundColor: isActive ? league.accentColor : undefined,
-                    }}
-                  />
-                );
-              })}
-            </div>
-
             <button
+              type="button"
               onClick={nextSlide}
-              id="carousel-bottom-next-btn"
-              aria-label="Ver próxima liga"
-              className="btn-hover p-2 text-gray-500 hover:text-gray-950 rounded-lg hover:bg-gray-100 cursor-pointer"
+              aria-label="Próxima liga"
+              className="w-10 h-10 rounded-full border border-gray-200 bg-gray-950 text-white hover:bg-gray-800 transition-colors flex items-center justify-center"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4" />
             </button>
-
           </div>
-
-          {/* Swipe / Keyboard Guidance Hint */}
-          <div className="flex items-center gap-3 text-[11px] font-mono text-gray-500">
-            <span className="hidden sm:inline">Navegue com setas do teclado (← →) ou clique nos tópicos</span>
-            <span className="sm:hidden">Deslize para o lado para trocar de liga</span>
-          </div>
-
         </div>
-
       </div>
     </section>
   );
