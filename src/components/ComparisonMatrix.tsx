@@ -52,6 +52,16 @@ const ICONS: Record<string, React.ReactNode> = {
   field_size: <Trophy className="w-4 h-4" />,
 };
 
+const CURRENT_FACT_OVERRIDES: Partial<Record<string, Partial<Record<'fll' | 'ftc' | 'frc', string>>>> = {
+  weight: {
+    ftc: 'Sem limite oficial de peso no manual 2025–2026',
+    frc: 'Até 115 lb (52,16 kg), excluindo bumpers e bateria — regras 2026',
+  },
+};
+
+const getDisplayValue = (item: (typeof COMPARISON_CRITERIA)[number], league: 'fll' | 'ftc' | 'frc') =>
+  CURRENT_FACT_OVERRIDES[item.id]?.[league] ?? item[league];
+
 export const ComparisonMatrix: React.FC = () => {
   const [showAll, setShowAll] = useState(false);
 
@@ -146,7 +156,7 @@ export const ComparisonMatrix: React.FC = () => {
                       <span className="w-2 h-2 rounded-full" style={{ backgroundColor: league.accent }} />
                       <span className="text-[10px] font-mono font-bold uppercase" style={{ color: league.accent }}>{league.name}</span>
                     </div>
-                    <p className="text-sm text-gray-700 leading-relaxed">{item[league.key]}</p>
+                    <p className="text-sm text-gray-700 leading-relaxed">{getDisplayValue(item, league.key)}</p>
                   </div>
                 ))}
               </div>
@@ -181,9 +191,10 @@ export const ComparisonMatrix: React.FC = () => {
           ))}
         </div>
 
-        <p className="mt-4 text-[10px] font-mono uppercase tracking-wider text-gray-400">
-          * Faixa usada pelo programa operado pelo SESI no Brasil; idades da FIRST LEGO League podem variar por país e formato.
-        </p>
+        <div className="mt-4 space-y-1 text-[10px] font-mono uppercase tracking-wider text-gray-400">
+          <p>* Faixa usada pelo programa operado pelo SESI no Brasil; idades da FIRST LEGO League podem variar por país e formato.</p>
+          <p>Dados de construção usam os manuais oficiais mais recentes disponíveis; regras podem mudar a cada temporada.</p>
+        </div>
       </div>
     </section>
   );
