@@ -11,10 +11,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuiz }) => {
     <section id="inicio" className="relative overflow-hidden bg-gray-950 pt-[66px] sm:pt-[76px] lg:pt-28">
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1800&q=90"
+          src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1400&q=80"
+          srcSet="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=720&q=76 720w, https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=78 1200w, https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1800&q=80 1800w"
+          sizes="100vw"
           alt="Robótica competitiva em ambiente de arena"
           className="h-full w-full object-cover object-center opacity-45"
           referrerPolicy="no-referrer"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/90 to-gray-950/35" />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-gray-950/30" />
@@ -40,29 +44,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuiz }) => {
             </div>
 
             <div className="grid grid-cols-1 gap-2.5 sm:flex sm:flex-wrap sm:items-center sm:gap-3">
-              <a
-                href="#ligas"
-                id="hero-cta-explore-leagues"
-                className="btn-hover inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-[#0066B3] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#005291] sm:w-auto sm:rounded-lg sm:px-6"
-              >
+              <a href="#ligas" id="hero-cta-explore-leagues" className="btn-hover inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-xl bg-[#0066B3] px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#005291] sm:w-auto sm:rounded-lg sm:px-6">
                 Explorar as ligas
                 <ArrowRight className="h-4 w-4" />
               </a>
 
-              <a
-                href="#sobre"
-                id="hero-cta-about-first"
-                className="btn-hover inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-md hover:bg-white/15 sm:w-auto sm:rounded-lg"
-              >
+              <a href="#sobre" id="hero-cta-about-first" className="btn-hover inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-md hover:bg-white/15 sm:w-auto sm:rounded-lg">
                 Entender a FIRST
                 <ArrowUpRight className="h-4 w-4" />
               </a>
 
-              <button
-                onClick={onOpenQuiz}
-                id="hero-quiz-link"
-                className="btn-hover inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl px-3 py-3 text-xs font-bold uppercase tracking-wider text-white/80 hover:bg-white/5 hover:text-white sm:w-auto sm:justify-start sm:rounded-lg sm:px-2"
-              >
+              <button onClick={onOpenQuiz} id="hero-quiz-link" className="btn-hover inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl px-3 py-3 text-xs font-bold uppercase tracking-wider text-white/80 hover:bg-white/5 hover:text-white sm:w-auto sm:justify-start sm:rounded-lg sm:px-2">
                 <PlayCircle className="h-4 w-4" />
                 Qual liga combina comigo?
               </button>
