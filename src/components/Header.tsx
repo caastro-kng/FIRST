@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 import { FirstLogo, SenaiLogo } from './OfficialLogos';
 
 interface HeaderProps {
@@ -7,161 +7,128 @@ interface HeaderProps {
   onOpenQuiz?: () => void;
 }
 
+const NAV_LINKS = [
+  { label: 'Sobre', href: '#sobre', id: 'sobre' },
+  { label: 'Ligas', href: '#ligas', id: 'ligas' },
+  { label: 'Brasil', href: '#sesi-senai', id: 'sesi-senai' },
+  { label: 'Jornada', href: '#jornada', id: 'jornada' },
+  { label: 'Temporada', href: '#temporada', id: 'temporada' },
+];
+
 export const Header: React.FC<HeaderProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('inicio');
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const sections = [
-      { id: 'sobre', matchIds: ['sobre', 'valores'] },
-      { id: 'ligas', matchIds: ['ligas', 'fll', 'ftc', 'frc', 'comparativo'] },
-      { id: 'sesi-senai', matchIds: ['sesi-senai', 'brasil'] },
-      { id: 'jornada', matchIds: ['jornada', 'equipe', 'como-funciona'] },
-      { id: 'temporada', matchIds: ['temporada', 'arena'] },
-    ];
-
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 16);
 
-      const scrollPosition = window.scrollY + 160;
+      const sectionIds = NAV_LINKS.map((link) => link.id);
+      const position = window.scrollY + 150;
+      let current = '';
 
-      for (const sec of sections) {
-        const primaryEl = document.getElementById(sec.id);
-        if (primaryEl) {
-          const top = primaryEl.offsetTop;
-          const height = primaryEl.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(sec.id);
-            return;
-          }
-        }
-      }
+      sectionIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element && position >= element.offsetTop) current = id;
+      });
 
-      if (window.scrollY < 200) {
-        setActiveSection('');
-      }
+      setActiveSection(current);
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'SOBRE', href: '#sobre', id: 'sobre' },
-    { label: 'LIGAS', href: '#ligas', id: 'ligas' },
-    { label: 'SESI/SENAI', href: '#sesi-senai', id: 'sesi-senai' },
-    { label: 'JORNADA', href: '#jornada', id: 'jornada' },
-    { label: 'TEMPORADA', href: '#temporada', id: 'temporada' },
-  ];
-
   return (
     <header
       id="main-header"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md border-b border-gray-200/90 shadow-2xs py-3.5'
-          : 'bg-white border-b border-gray-200/60 py-4.5'
+          ? 'bg-white/90 backdrop-blur-xl border-b border-gray-200/80 shadow-[0_8px_30px_rgba(15,23,42,0.04)]'
+          : 'bg-white/95 border-b border-gray-200/60'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-11 sm:h-12">
-          
-          {/* Institutional Co-Branding Signature: [FIRST OFICIAL] | [SENAI OFICIAL] */}
+        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-[68px]' : 'h-[76px]'}`}>
           <a
             href="#inicio"
-            id="brand-logo-link"
-            className="flex items-center gap-3 sm:gap-4.5 focus:outline-hidden group shrink-0"
-            aria-label="FIRST e SENAI Brasil - Início"
+            className="flex items-center gap-3 sm:gap-4 shrink-0 group"
+            aria-label="FIRST e SENAI — início"
           >
-            {/* Official FIRST Logo */}
-            <div className="flex items-center h-8 sm:h-9">
-              <FirstLogo className="h-7 sm:h-8.5 w-auto max-w-[130px] sm:max-w-[155px] transition-transform group-hover:scale-101" />
-            </div>
-
-            {/* Discrete, fine vertical divider */}
-            <div className="h-5 sm:h-6 w-px bg-gray-300/80" aria-hidden="true" />
-
-            {/* Official SENAI Logo */}
-            <div className="flex items-center h-6 sm:h-7.5">
-              <SenaiLogo className="h-5.5 sm:h-7 w-auto max-w-[95px] sm:max-w-[115px] transition-transform group-hover:scale-101" />
-            </div>
+            <FirstLogo className="h-7 sm:h-8 w-auto max-w-[122px] sm:max-w-[142px] transition-transform duration-300 group-hover:scale-[1.02]" />
+            <span className="h-6 w-px bg-gray-300" aria-hidden="true" />
+            <SenaiLogo className="h-5 sm:h-6 w-auto max-w-[86px] sm:max-w-[102px] transition-transform duration-300 group-hover:scale-[1.02]" />
           </a>
 
-          {/* Desktop Navigation Menu (Centered & Clean) */}
-          <nav className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-wider text-gray-600">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
+          <nav className="hidden lg:flex items-center gap-1 rounded-full border border-gray-200/80 bg-gray-50/80 p-1" aria-label="Navegação principal">
+            {NAV_LINKS.map((link) => {
+              const active = activeSection === link.id;
               return (
                 <a
                   key={link.id}
                   href={link.href}
-                  id={`nav-link-${link.id}`}
-                  className={`py-1.5 transition-colors relative tracking-wide uppercase ${
-                    isActive ? 'text-[#0066B3]' : 'hover:text-gray-950 text-gray-700'
+                  className={`relative rounded-full px-4 py-2 text-[11px] font-bold uppercase tracking-[0.1em] transition-all ${
+                    active
+                      ? 'bg-white text-gray-950 shadow-sm ring-1 ring-gray-200/70'
+                      : 'text-gray-500 hover:text-gray-950 hover:bg-white/70'
                   }`}
                 >
-                  <span>{link.label}</span>
-                  <span
-                    className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#0066B3] transition-transform duration-200 origin-left ${
-                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                    }`}
-                  />
+                  {link.label}
+                  {active && <span className="absolute left-1/2 -bottom-1 w-1 h-1 -translate-x-1/2 rounded-full bg-[#0066B3]" />}
                 </a>
               );
             })}
           </nav>
 
-          {/* Right Action: CTA EXPLORAR LIGAS → */}
-          <div className="hidden sm:flex items-center">
+          <div className="hidden lg:flex items-center">
             <a
               href="#ligas"
-              id="header-cta-leagues"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white bg-[#0066B3] hover:bg-[#005291] rounded-lg shadow-2xs transition-all hover:translate-y-[-1px] active:translate-y-0"
+              className="btn-hover inline-flex items-center gap-2 rounded-full bg-gray-950 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.11em] text-white hover:bg-[#0066B3]"
             >
-              <span>Explorar ligas</span>
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+              Explorar ligas
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
-          {/* Mobile Menu Trigger */}
-          <div className="flex items-center lg:hidden">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              id="mobile-menu-toggle-btn"
-              className="p-2 text-gray-800 hover:text-black focus:outline-hidden rounded-lg hover:bg-gray-100"
-              aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-900 shadow-sm"
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-gray-200 px-4 pt-3 pb-6 space-y-3 shadow-lg animate-in fade-in duration-200">
-          <nav className="flex flex-col space-y-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2.5 text-sm font-bold uppercase tracking-wider text-gray-800 hover:bg-gray-50 hover:text-[#0066B3] rounded-lg transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+        <div className="lg:hidden border-t border-gray-200 bg-white/98 backdrop-blur-xl">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+            <nav className="grid gap-1" aria-label="Navegação mobile">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-wider transition-colors ${
+                    activeSection === link.id ? 'bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {link.label}
+                  <span className={`w-1.5 h-1.5 rounded-full ${activeSection === link.id ? 'bg-[#ED1C24]' : 'bg-gray-300'}`} />
+                </a>
+              ))}
+            </nav>
 
-          <div className="pt-2 border-t border-gray-100">
             <a
               href="#ligas"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-xs font-bold uppercase tracking-wider text-white bg-[#0066B3] rounded-lg"
+              className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0066B3] px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-white"
             >
-              <span>Explorar ligas</span>
+              Explorar as ligas
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
