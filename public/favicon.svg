@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="FIRST Robotics">
+  <rect width="64" height="64" rx="16" fill="#0B0F19"/>
+  <path d="M16 19h22v7H24v7h12v7H24v11h-8V19Z" fill="#FFFFFF"/>
+  <circle cx="46" cy="44" r="7" fill="#ED1C24"/>
+  <circle cx="46" cy="44" r="3" fill="#0B0F19"/>
+</svg>
