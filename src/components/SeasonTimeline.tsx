@@ -3,25 +3,26 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { SEASON_STEPS } from '../data/firstData';
 import { ArrowRight, CheckCircle2, Clock3, Trophy, Leaf } from 'lucide-react';
 
-// Official FIRST imagery selected to illustrate the real rhythm of a season.
+// Seven distinct, verified images. Most come from SESI-DF / Sistema Fibra so the
+// timeline also reflects the local FIRST ecosystem instead of repeating generic arena shots.
 const SEASON_IMAGES = [
-  'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0312.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230419_bm_0707.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230422_bm_1882.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0312.jpg?width=1200',
-  'https://www.firstinspires.org/hs-fs/hubfs/20230422_bm_2231.jpg?width=1200',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_corpo.jpg',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2026/06_junho/3-6-2026__Sesi_GAMA_Torneio_Interno_de_Rob%C3%B3tica_FLLC_Foto_Victor_Hugo_Pessoa_CAPA-31.jpg',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_2.jpg',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_1.jpg',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_3.jpg',
+  'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/04-abril/29-04-2026_Equipe_Robots_District_Foto_Dayane_dos_Santos_Sistema_Fibra.jpg',
   'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg',
 ];
 
 const SEASON_IMAGE_ALTS = [
-  'Grande evento FIRST representando o início da temporada e a revelação do desafio.',
-  'Estudantes e robô FIRST durante fase de prototipagem e desenvolvimento.',
-  'Equipe FIRST trabalhando diretamente na construção e integração do robô.',
-  'Estudantes em evento FIRST durante fase de programação, calibração e testes.',
-  'Equipe FIRST ajustando o robô antes de entrar em competição.',
-  'Comunidade FIRST reunida em um grande evento, representando treino, preparação e competição.',
-  'Arena lotada no FIRST Championship, clímax internacional da temporada.',
+  'Equipe Robot’s District do SESI-DF reunida no início de uma temporada FIRST Robotics Competition.',
+  'Estudante do SESI-DF em atividade de robótica durante etapa de desenvolvimento e experimentação.',
+  'Integrantes da Robot’s District trabalhando na estrutura mecânica do robô durante o desenvolvimento.',
+  'Detalhe da integração elétrica e eletrônica do robô da Robot’s District durante a fabricação.',
+  'Estudantes da Robot’s District trabalhando com computador durante programação e calibração do robô.',
+  'Robot’s District no FIRST Championship em Houston durante a fase de preparação para a competição.',
+  'Arena do FIRST Championship representando o clímax competitivo da temporada.',
 ];
 
 const CURRENT_SEASON = [
@@ -120,13 +121,12 @@ export const SeasonTimeline: React.FC = () => {
               >
                 <div className="relative rounded-[28px] overflow-hidden min-h-[320px] sm:min-h-[410px] border border-white/10 bg-black">
                   <img
-                    src={SEASON_IMAGES[activeIndex] || SEASON_IMAGES[0]}
+                    src={SEASON_IMAGES[activeIndex]}
                     alt={SEASON_IMAGE_ALTS[activeIndex] || step.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-[1.015]"
                     loading="lazy"
                     decoding="async"
                     fetchPriority="low"
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
                   <div className="absolute top-5 left-5 right-5 flex items-center justify-between gap-4">
