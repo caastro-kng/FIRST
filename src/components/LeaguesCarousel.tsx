@@ -71,6 +71,12 @@ const LEAGUES_CONFIG: Array<{
   },
 ];
 
+const LEAGUE_IMAGE_FALLBACKS: Record<LeagueId, string> = {
+  fll: 'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0319.jpg?width=1600',
+  ftc: 'https://www.firstinspires.org/hs-fs/hubfs/image-library/web/20250417dan1701-1260x840.webp?height=840&name=20250417dan1701-1260x840.webp&width=1260',
+  frc: 'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0125_1.webp?name=20230420_bm_0125_1.webp&width=2000',
+};
+
 const slideVariants = {
   enter: (direction: number) => ({ x: direction > 0 ? 48 : -48, opacity: 0 }),
   center: { x: 0, opacity: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
@@ -146,6 +152,13 @@ export const LeaguesCarousel: React.FC<LeaguesCarouselProps> = ({ onOpenGlossary
     touchEndX.current = null;
   };
 
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const image = event.currentTarget;
+    if (image.dataset.fallbackApplied === 'true') return;
+    image.dataset.fallbackApplied = 'true';
+    image.src = LEAGUE_IMAGE_FALLBACKS[activeConfig.key];
+  };
+
   return (
     <section id="ligas" className="scroll-mt-24 lg:scroll-mt-28 bg-[#F7F7F5] relative border-b border-gray-200 overflow-hidden select-none">
       <div className="absolute inset-0 pointer-events-none opacity-60 bg-[radial-gradient(circle_at_85%_10%,rgba(0,102,179,0.08),transparent_28%)]" />
@@ -191,7 +204,19 @@ export const LeaguesCarousel: React.FC<LeaguesCarouselProps> = ({ onOpenGlossary
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div key={activeConfig.key} custom={direction} variants={slideVariants} initial="enter" animate="center" exit="exit" className="grid grid-cols-1 lg:grid-cols-12 bg-white border border-gray-200 rounded-[1.75rem] overflow-hidden shadow-[0_22px_70px_rgba(17,24,39,0.10)]">
               <div className="lg:col-span-7 relative min-h-[360px] sm:min-h-[480px] lg:min-h-[620px] bg-gray-950 overflow-hidden">
-                <motion.img src={activeData.imageUrl} alt={activeData.name} initial={{ scale: 1.06 }} animate={{ scale: 1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }} className="absolute inset-0 w-full h-full object-cover" referrerPolicy="no-referrer" />
+                <motion.img
+                  key={`league-image-${activeConfig.key}`}
+                  src={activeData.imageUrl}
+                  alt={activeData.imageCaption || `${activeData.name} em atividade de competição FIRST`}
+                  initial={{ scale: 1.06 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                  onError={handleImageError}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/10" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
                 <div className="absolute top-5 left-5 sm:top-7 sm:left-7 flex items-center gap-2">
