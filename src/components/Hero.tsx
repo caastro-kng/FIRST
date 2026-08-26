@@ -5,7 +5,8 @@ interface HeroProps {
   onOpenQuiz: () => void;
 }
 
-const HERO_IMAGE_URL = 'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg';
+const HERO_IMAGE_URL = '/images/site/hero-championship.jpg';
+const HERO_IMAGE_FALLBACK = 'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg';
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuiz }) => {
   return (
@@ -17,7 +18,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuiz }) => {
           className="h-full w-full object-cover object-center opacity-50"
           fetchPriority="high"
           decoding="async"
-          referrerPolicy="no-referrer"
+          onError={(event) => {
+            const image = event.currentTarget;
+            if (image.dataset.fallbackApplied === 'true') return;
+            image.dataset.fallbackApplied = 'true';
+            image.src = HERO_IMAGE_FALLBACK;
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/88 to-gray-950/28" />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-gray-950/25" />
