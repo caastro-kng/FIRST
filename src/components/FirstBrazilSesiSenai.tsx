@@ -17,7 +17,6 @@ const DF_STORIES = [
     image: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/02-fevereiro/23-1-2026_Equipes_FRC_-_Foto_Bruno_Frauzino-2827_ROBOTS_DISTRICT.jpg',
     fallback: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/02-fevereiro/23-1-2026_Equipes_FRC_-_Foto_Bruno_Frauzino-2864.jpg',
     alt: 'Integrantes da Robot’s District FRC 9484 do SESI e SENAI-DF na temporada 2025/2026.',
-    href: 'https://www.sistemafibra.org.br/senai/institucional/historico/40-noticias/destaques/1822-conheca-as-equipes-que-defendem-o-sesi-df-e-o-senai-df-na-temporada-2025-2026-da-first-robotics-competition',
   },
   {
     eyebrow: 'BRASÍLIA → HOUSTON',
@@ -26,7 +25,6 @@ const DF_STORIES = [
     image: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/05-maio/RobotsDistrict-no-First-Championship-2026-FotoDayanedosSantos-SistemaFibra-1.5.jpg',
     fallback: 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2025/04_abril/16-04-FRC-Samira-Padua-Sistema-Fibra-1.jpg',
     alt: 'Robot’s District em uma arena da FIRST Robotics Competition durante o FIRST Championship 2026 em Houston.',
-    href: 'https://www.sistemafibra.org.br/senai/institucional/historico/40-noticias/destaques/1836-alunos-do-sesi-e-do-senai-df-vivem-o-sonho-do-mundial-de-robotica',
   },
   {
     eyebrow: 'BRASÍLIA → CONQUISTA',
@@ -35,7 +33,6 @@ const DF_STORIES = [
     image: 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2025/04_abril/interna-Foto-SamiraPadua-SistemaFibra1.jpg',
     fallback: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/02-fevereiro/23-1-2026_Equipes_FRC_-_Foto_Bruno_Frauzino-2816_Federal_Force.jpg',
     alt: 'Integrantes da Federal Force comemorando conquista no FIRST Championship 2025.',
-    href: 'https://www.sistemafibra.org.br/sesi/institucional/imprensa/noticias/2217-equipe-do-df-e-premiada-no-first-championship-2025',
   },
 ];
 
@@ -67,7 +64,7 @@ export const FirstBrazilSesiSenai: React.FC = () => {
               className="mt-4 inline-flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-[0.14em] text-gray-700 transition-colors hover:text-[#0066B3]"
               aria-label="Ver FIRST Robotics Competition no site do SESI (abre em nova aba)"
             >
-              Ver operação no Brasil
+              Ver FIRST Robotics Competition no SESI
               <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
@@ -112,18 +109,14 @@ export const FirstBrazilSesiSenai: React.FC = () => {
           </div>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
             {DF_STORIES.map((story, index) => (
-              <motion.a
+              <motion.article
                 key={story.title}
-                href={story.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 initial={reduceMotion ? false : { opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: reduceMotion ? 0 : 0.3, delay: reduceMotion ? 0 : index * 0.05 }}
                 whileHover={reduceMotion ? undefined : { y: -4 }}
                 className={`${index === 0 ? 'lg:col-span-5' : 'lg:col-span-7 xl:col-span-7'} group relative min-h-[320px] overflow-hidden rounded-3xl border border-gray-200 bg-gray-950 shadow-sm ${index === 2 ? 'lg:col-start-6' : ''}`}
-                aria-label={`${story.title} — abrir matéria do Sistema Fibra em nova aba`}
               >
                 <img
                   src={story.image}
@@ -144,11 +137,8 @@ export const FirstBrazilSesiSenai: React.FC = () => {
                   <div className="text-[10px] font-mono font-bold uppercase tracking-[0.16em] text-blue-300">{story.eyebrow}</div>
                   <h3 className="mt-2 text-xl font-black uppercase tracking-tight text-white sm:text-2xl">{story.title}</h3>
                   <p className="mt-2 max-w-2xl text-xs leading-relaxed text-white/75 sm:text-sm">{story.description}</p>
-                  <div className="mt-4 inline-flex items-center gap-2 text-[10px] font-mono font-bold uppercase tracking-wider text-white/80">
-                    Ver história <ArrowUpRight className="h-3.5 w-3.5" />
-                  </div>
                 </div>
-              </motion.a>
+              </motion.article>
             ))}
           </div>
         </div>
