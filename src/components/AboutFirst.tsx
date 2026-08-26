@@ -14,12 +14,12 @@ export const AboutFirst: React.FC = () => {
             </div>
             <h2 className="text-4xl font-black uppercase leading-[0.98] tracking-[-0.035em] text-gray-950 sm:text-5xl lg:text-6xl">
               TRANSFORMAR A CULTURA<br />
-              ATRAVÉS DA <span className="text-[#0066B3]">ENGENHARIA.</span>
+              POR MEIO DA <span className="text-[#0066B3]">ENGENHARIA.</span>
             </h2>
           </div>
           <div className="lg:col-span-4">
             <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
-              A FIRST usa robôs como ferramenta. O objetivo maior é formar jovens capazes de criar, colaborar, liderar e resolver problemas reais.
+              A FIRST usa a robótica como ferramenta. O objetivo maior é formar jovens capazes de criar, colaborar, liderar e resolver problemas reais.
             </p>
           </div>
         </div>
@@ -37,7 +37,7 @@ export const AboutFirst: React.FC = () => {
               </div>
 
               <p className="text-sm leading-relaxed text-gray-700 sm:text-base">
-                Criada por <strong>Dean Kamen</strong> com a colaboração do <strong>Dr. Woodie Flowers</strong>, a FIRST nasceu para fazer ciência e tecnologia ocuparem, na cultura jovem, o mesmo espaço de prestígio que esporte e entretenimento.
+                Criada por <strong>Dean Kamen</strong>, com a colaboração do <strong>Dr. Woodie Flowers</strong>, a FIRST nasceu para fazer ciência e tecnologia ocuparem, na cultura jovem, o mesmo espaço de prestígio do esporte e do entretenimento.
               </p>
 
               <blockquote className="border-l-4 border-[#0066B3] pl-5 text-lg font-bold leading-snug text-gray-950 sm:text-xl">
@@ -49,13 +49,13 @@ export const AboutFirst: React.FC = () => {
                   <div className="flex items-center gap-2 text-xs font-bold uppercase text-gray-950">
                     <CheckCircle2 className="h-4 w-4 text-[#0066B3]" /> Mentoria
                   </div>
-                  <p className="mt-2 text-xs leading-relaxed text-gray-600">Professores, técnicos e profissionais apoiam alunos no processo de engenharia.</p>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-600">Professores, técnicos e profissionais apoiam os estudantes ao longo do processo de engenharia.</p>
                 </div>
                 <div className="rounded-2xl border border-gray-200 bg-white p-4">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase text-gray-950">
                     <Sparkles className="h-4 w-4 text-[#ED1C24]" /> Protagonismo
                   </div>
-                  <p className="mt-2 text-xs leading-relaxed text-gray-600">O estudante participa das decisões, da construção, da comunicação e da estratégia.</p>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-600">Os estudantes participam das decisões, da construção, da comunicação e da estratégia.</p>
                 </div>
               </div>
             </div>
