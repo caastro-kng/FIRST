@@ -39,7 +39,7 @@ export const ImpactStats: React.FC = () => {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-4">
-            <div className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#0066B3]">ESCALA GLOBAL</div>
+            <div className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#0066B3]">02 / ESCALA GLOBAL</div>
             <h2 className="mt-3 text-3xl font-black uppercase leading-[1.02] tracking-[-0.035em] text-gray-950 sm:text-4xl">
               UM MOVIMENTO<br />
               <span className="text-[#0066B3]">MUITO ALÉM DA ARENA.</span>
