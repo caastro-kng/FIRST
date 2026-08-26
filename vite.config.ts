@@ -1,10 +1,26 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
+import { SITE_IMAGES, localImagePath } from './scripts/image-manifest.mjs';
+
+const cacheSiteImagesPlugin = (): Plugin => ({
+  name: 'cache-site-images',
+  enforce: 'pre',
+  transform(code, id) {
+    if (!id.includes('/src/')) return null;
+
+    let transformed = code;
+    for (const image of SITE_IMAGES) {
+      transformed = transformed.split(image.source).join(localImagePath(image.file));
+    }
+
+    return transformed === code ? null : { code: transformed, map: null };
+  },
+});
 
 export default defineConfig(() => ({
-  plugins: [react(), tailwindcss()],
+  plugins: [cacheSiteImagesPlugin(), react(), tailwindcss()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
