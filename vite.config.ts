@@ -1,6 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
 import { SITE_IMAGES, localImagePath } from './scripts/image-manifest.mjs';
 
@@ -12,6 +13,13 @@ const cacheSiteImagesPlugin = (): Plugin => ({
 
     let transformed = code;
     for (const image of SITE_IMAGES) {
+      const cachedFile = path.resolve('public/images/site', image.file);
+
+      // The prebuild cache is best-effort. Only point the application to the
+      // local asset when the file was actually downloaded; otherwise preserve
+      // the original remote URL so component-level fallbacks can still work.
+      if (!fs.existsSync(cachedFile)) continue;
+
       transformed = transformed.split(image.source).join(localImagePath(image.file));
     }
 
