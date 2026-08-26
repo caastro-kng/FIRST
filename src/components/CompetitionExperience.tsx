@@ -2,11 +2,11 @@ import React from 'react';
 import { COMPETITION_AREAS } from '../data/firstData';
 import { Wrench, Code, LineChart, Palette, Coins, Sparkles, Users, Award } from 'lucide-react';
 
-// Prefer Sistema Fibra / SESI-DF imagery that is already used successfully elsewhere in the project.
-// Each card also has a distinct fallback so a failed remote image never leaves the visual area blank.
-const ARENA_IMAGE = 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/04-abril/29-04-2026_Equipe_Robots_District_Foto_Dayane_dos_Santos_Sistema_Fibra.jpg';
-const ARENA_FALLBACK = 'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg';
-const PITS_IMAGE = 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_2.jpg';
+// Image audit: these two photos are exclusive to this section so the site does not
+// reuse the same arena/pit imagery across Hero, Season Timeline and Competition Experience.
+const ARENA_IMAGE = 'https://www.firstinspires.org/hs-fs/hubfs/Screenshot%202025-09-23%20094958.png?height=299&name=Screenshot+2025-09-23+094958.png&width=630';
+const ARENA_FALLBACK = 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2025/04_abril/16-04-FRC-Samira-Padua-Sistema-Fibra-1.jpg';
+const PITS_IMAGE = 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2025/04_abril/16-04-FRC-Samira-Padua-Sistema-Fibra-2.jpg';
 const PITS_FALLBACK = 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_corpo.jpg';
 
 export const CompetitionExperience: React.FC = () => {
@@ -53,7 +53,7 @@ export const CompetitionExperience: React.FC = () => {
           <figure className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] lg:col-span-8 lg:min-h-[390px]">
             <img
               src={ARENA_IMAGE}
-              alt="Robot’s District do SESI-DF em ambiente de competição FIRST, representando arena, estratégia e pressão"
+              alt="Grande ambiente do FIRST Championship com arena e público acompanhando as competições"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               loading="lazy"
               decoding="async"
@@ -70,7 +70,7 @@ export const CompetitionExperience: React.FC = () => {
           <figure className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] lg:col-span-4 lg:min-h-[390px]">
             <img
               src={PITS_IMAGE}
-              alt="Integrantes da Robot’s District trabalhando no robô FRC do SESI-DF durante preparação e manutenção"
+              alt="Integrantes de equipes FRC trabalhando e ajustando robôs em uma área de pits antes das partidas"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               loading="lazy"
               decoding="async"
