@@ -156,7 +156,10 @@ img {
   #comparativo > div,
   #como-funciona > div,
   #valores > div:last-child,
-  #jornada > div {
+  #jornada > div,
+  #temporada > div,
+  #experiencia > div:last-child,
+  #sesi-senai > div:last-child {
     padding-top: 4.5rem !important;
     padding-bottom: 4.5rem !important;
   }
@@ -179,7 +182,10 @@ img {
   #comparativo > div > div:first-child,
   #como-funciona > div > div:first-child,
   #valores > div:last-child > div:first-child,
-  #jornada > div > div:first-child {
+  #jornada > div > div:first-child,
+  #temporada > div > div:first-child,
+  #experiencia > div:last-child > div:first-child,
+  #sesi-senai > div:last-child > div:first-child {
     margin-bottom: 2.5rem !important;
   }
 
@@ -223,6 +229,38 @@ img {
   #jornada button {
     padding-top: 0.875rem !important;
     padding-bottom: 0.875rem !important;
+  }
+
+  #temporada .min-h-\[410px\] {
+    min-height: 350px !important;
+  }
+
+  #temporada button {
+    padding-top: 0.8rem !important;
+    padding-bottom: 0.8rem !important;
+  }
+
+  #temporada button .truncate {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    line-height: 1.08 !important;
+  }
+
+  #experiencia .lg\:min-h-\[390px\] {
+    min-height: 340px !important;
+  }
+
+  #experiencia .mb-10 {
+    margin-bottom: 2rem !important;
+  }
+
+  #sesi-senai .mb-12 {
+    margin-bottom: 2.5rem !important;
+  }
+
+  #sesi-senai .min-h-\[320px\] {
+    min-height: 280px !important;
   }
 }
 
