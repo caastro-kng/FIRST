@@ -3,8 +3,8 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { SEASON_STEPS } from '../data/firstData';
 import { ArrowRight, CheckCircle2, Clock3, Trophy, Leaf } from 'lucide-react';
 
-// Seven distinct, verified images. Most come from SESI-DF / Sistema Fibra so the
-// timeline also reflects the local FIRST ecosystem instead of repeating generic arena shots.
+// Seven distinct primary images. The final Championship photo is deliberately
+// different from the Hero image after the visual image audit.
 const SEASON_IMAGES = [
   'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_corpo.jpg',
   'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2026/06_junho/3-6-2026__Sesi_GAMA_Torneio_Interno_de_Rob%C3%B3tica_FLLC_Foto_Victor_Hugo_Pessoa_CAPA-31.jpg',
@@ -12,6 +12,17 @@ const SEASON_IMAGES = [
   'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_1.jpg',
   'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_3.jpg',
   'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/04-abril/29-04-2026_Equipe_Robots_District_Foto_Dayane_dos_Santos_Sistema_Fibra.jpg',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2025/04_abril/16-04-FRC-Samira-Padua-Sistema-Fibra-1.jpg',
+];
+
+// Distinct fallbacks prevent a broken remote URL from leaving the stage blank.
+const SEASON_FALLBACK_IMAGES = [
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2026/04_abril/29-04-2026_Equipe_Albatroid_Foto_Dayane_dos_Santos_Sistema_Fibra.jpg',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2026/05_maio/01052026_First_Championship_Foto_Dayane_dos_Santos_Sistema_Fibra.JPG',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2025/04_abril/16-04-FRC-Samira-Padua-Sistema-Fibra-2.jpg',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2026/05_maio/02052026_First_Championship_Foto_Dayane_dos_Santos_Sistema_Fibra_capa.JPG',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2026/06_junho/3-6-2026__Sesi_GAMA_Torneio_Interno_de_Rob%C3%B3tica_FLLC_Foto_Victor_Hugo_Pessoa_CAPA-16.jpg',
+  'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2026/04_abril/29-04-2026_Equipe_Robots_District_Foto_Dayane_dos_Santos_Sistema_Fibra.jpg',
   'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg',
 ];
 
@@ -22,7 +33,7 @@ const SEASON_IMAGE_ALTS = [
   'Detalhe da integração elétrica e eletrônica do robô da Robot’s District durante a fabricação.',
   'Estudantes da Robot’s District trabalhando com computador durante programação e calibração do robô.',
   'Robot’s District no FIRST Championship em Houston durante a fase de preparação para a competição.',
-  'Arena do FIRST Championship representando o clímax competitivo da temporada.',
+  'Robôs do Distrito Federal em uma arena do FIRST Championship durante partidas oficiais.',
 ];
 
 const CURRENT_SEASON = [
@@ -121,12 +132,20 @@ export const SeasonTimeline: React.FC = () => {
               >
                 <div className="relative rounded-[28px] overflow-hidden min-h-[320px] sm:min-h-[410px] border border-white/10 bg-black">
                   <img
+                    key={`season-image-${activeIndex}`}
                     src={SEASON_IMAGES[activeIndex]}
                     alt={SEASON_IMAGE_ALTS[activeIndex] || step.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-[1.015]"
                     loading="lazy"
                     decoding="async"
                     fetchPriority="low"
+                    onError={(event) => {
+                      const image = event.currentTarget;
+                      const fallback = SEASON_FALLBACK_IMAGES[activeIndex];
+                      if (image.dataset.fallbackApplied === 'true' || !fallback) return;
+                      image.dataset.fallbackApplied = 'true';
+                      image.src = fallback;
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
                   <div className="absolute top-5 left-5 right-5 flex items-center justify-between gap-4">
