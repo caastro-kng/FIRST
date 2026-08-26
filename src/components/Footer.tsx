@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
                 <span className="text-[#65B9F0]">AS PESSOAS SÃO O RESULTADO.</span>
               </h2>
               <p className="text-sm sm:text-base text-gray-400 leading-relaxed max-w-xl">
-                Um guia educacional sobre as ligas FIRST, a formação dos estudantes e o ecossistema de robótica conectado ao SESI e SENAI no Brasil.
+                Um guia educacional sobre as ligas FIRST, a formação dos estudantes e o ecossistema de robótica conectado ao SESI e ao SENAI no Brasil.
               </p>
             </div>
           </div>
@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
             <nav aria-label="Explorar o guia">
               <h3 className="text-[11px] font-mono font-bold text-white uppercase tracking-widest mb-4">Explorar</h3>
               <ul className="space-y-3 text-sm">
-                <li><a href="#sobre" className="hover:text-white transition-colors">O que é FIRST</a></li>
+                <li><a href="#sobre" className="hover:text-white transition-colors">O que é a FIRST</a></li>
                 <li><a href="#ligas" className="hover:text-white transition-colors">Ligas</a></li>
                 <li><a href="#comparativo" className="hover:text-white transition-colors">Comparativo</a></li>
                 <li><a href="#jornada" className="hover:text-white transition-colors">Jornada</a></li>
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
               <ul className="space-y-3 text-sm">
                 <li>
                   <a href="https://www.firstinspires.org" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-white transition-colors">
-                    FIRST Inspires <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                    FIRST <ExternalLink className="w-3 h-3" aria-hidden="true" />
                     <span className="sr-only">(abre em nova aba)</span>
                   </a>
                 </li>
