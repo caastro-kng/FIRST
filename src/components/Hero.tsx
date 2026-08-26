@@ -38,7 +38,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuiz }) => {
               </h1>
 
               <p className="max-w-2xl text-[15px] leading-relaxed text-gray-300 sm:text-lg">
-                Jovens projetam, constroem e programam máquinas para competir — enquanto aprendem liderança, estratégia, comunicação e engenharia de verdade.
+                Jovens projetam, constroem e programam máquinas para competir enquanto desenvolvem liderança, estratégia, comunicação e engenharia na prática.
               </p>
             </div>
 
