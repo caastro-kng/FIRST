@@ -2,8 +2,12 @@ import React from 'react';
 import { COMPETITION_AREAS } from '../data/firstData';
 import { Wrench, Code, LineChart, Palette, Coins, Sparkles, Users, Award } from 'lucide-react';
 
-const ARENA_IMAGE = 'https://www.firstinspires.org/hs-fs/hubfs/frc_crowd_1jc2110_1.jpg?width=1400';
-const PITS_IMAGE = 'https://www.firstinspires.org/hs-fs/hubfs/20230420_bm_0125_1.jpg?width=1000';
+// Prefer Sistema Fibra / SESI-DF imagery that is already used successfully elsewhere in the project.
+// Each card also has a distinct fallback so a failed remote image never leaves the visual area blank.
+const ARENA_IMAGE = 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/04-abril/29-04-2026_Equipe_Robots_District_Foto_Dayane_dos_Santos_Sistema_Fibra.jpg';
+const ARENA_FALLBACK = 'https://community.firstinspires.org/hubfs/first-blog_community_cmpupdates2-024.jpg';
+const PITS_IMAGE = 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_2.jpg';
+const PITS_FALLBACK = 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_corpo.jpg';
 
 export const CompetitionExperience: React.FC = () => {
   const getAreaIcon = (iconName: string) => {
@@ -15,6 +19,13 @@ export const CompetitionExperience: React.FC = () => {
       case 'Coins': return <Coins className="h-5 w-5" />;
       default: return <Sparkles className="h-5 w-5" />;
     }
+  };
+
+  const useFallback = (event: React.SyntheticEvent<HTMLImageElement>, fallback: string) => {
+    const image = event.currentTarget;
+    if (image.dataset.fallbackApplied === 'true') return;
+    image.dataset.fallbackApplied = 'true';
+    image.src = fallback;
   };
 
   return (
@@ -42,12 +53,12 @@ export const CompetitionExperience: React.FC = () => {
           <figure className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] lg:col-span-8 lg:min-h-[390px]">
             <img
               src={ARENA_IMAGE}
-              alt="Grande evento FIRST com arena, equipes e público acompanhando as partidas"
+              alt="Robot’s District do SESI-DF em ambiente de competição FIRST, representando arena, estratégia e pressão"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               loading="lazy"
               decoding="async"
               fetchPriority="low"
-              referrerPolicy="no-referrer"
+              onError={(event) => useFallback(event, ARENA_FALLBACK)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent" />
             <figcaption className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
@@ -59,12 +70,12 @@ export const CompetitionExperience: React.FC = () => {
           <figure className="group relative min-h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] lg:col-span-4 lg:min-h-[390px]">
             <img
               src={PITS_IMAGE}
-              alt="Estudantes da FIRST trabalhando próximos a um robô de competição nos bastidores do evento"
+              alt="Integrantes da Robot’s District trabalhando no robô FRC do SESI-DF durante preparação e manutenção"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               loading="lazy"
               decoding="async"
               fetchPriority="low"
-              referrerPolicy="no-referrer"
+              onError={(event) => useFallback(event, PITS_FALLBACK)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/25 to-transparent" />
             <figcaption className="absolute bottom-0 left-0 right-0 p-6">
