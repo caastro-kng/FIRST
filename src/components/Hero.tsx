@@ -9,7 +9,7 @@ const HERO_IMAGE_URL = 'https://community.firstinspires.org/hubfs/first-blog_com
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuiz }) => {
   return (
-    <section id="inicio" className="relative overflow-hidden bg-gray-950 pt-[66px] sm:pt-[76px] lg:pt-28">
+    <section id="inicio" className="relative overflow-hidden bg-gray-950 pt-[66px] sm:pt-[76px] lg:pt-[76px]">
       <div className="absolute inset-0">
         <img
           src={HERO_IMAGE_URL}
