@@ -11,26 +11,29 @@ const BRAZIL_STATS = [
 
 const DF_STORIES = [
   {
-    eyebrow: 'BRASÍLIA → OFICINA',
+    eyebrow: 'BRASÍLIA → EQUIPE',
     title: 'ROBOT’S DISTRICT • FRC 9484',
-    description: 'A equipe do SESI/SENAI-DF em preparação técnica, trabalhando diretamente no robô e na integração dos sistemas.',
-    image: 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2024/Fevereiro/EQUIPE_FRC_-_Robots_District_-_Taguatinga_-_Foto_Bruno_Frauzino_2.jpg',
-    alt: 'Integrantes da Robot’s District do SESI-DF trabalhando no robô da FRC 9484 em Brasília.',
-    href: 'https://www.sistemafibra.org.br/sesi/imprensa/noticias/2122-com-a-robot-s-district-sesi-df-participa-pela-primeira-vez-da-first-robotics-competition',
+    description: 'A formação 2025/2026 da Robot’s District representa o SESI e o SENAI-DF em uma estrutura de equipe multidisciplinar.',
+    image: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/02-fevereiro/23-1-2026_Equipes_FRC_-_Foto_Bruno_Frauzino-2827_ROBOTS_DISTRICT.jpg',
+    fallback: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/02-fevereiro/23-1-2026_Equipes_FRC_-_Foto_Bruno_Frauzino-2864.jpg',
+    alt: 'Integrantes da Robot’s District FRC 9484 do SESI e SENAI-DF na temporada 2025/2026.',
+    href: 'https://www.sistemafibra.org.br/senai/institucional/historico/40-noticias/destaques/1822-conheca-as-equipes-que-defendem-o-sesi-df-e-o-senai-df-na-temporada-2025-2026-da-first-robotics-competition',
   },
   {
     eyebrow: 'BRASÍLIA → HOUSTON',
     title: 'ROBOT’S DISTRICT NO FIRST CHAMPIONSHIP 2026',
-    description: 'A equipe do Distrito Federal chegou ao mundial pelo segundo ano consecutivo, representando SESI e SENAI-DF em Houston.',
-    image: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/04-abril/29-04-2026_Equipe_Robots_District_Foto_Dayane_dos_Santos_Sistema_Fibra.jpg',
-    alt: 'Equipe Robot’s District reunida em Houston durante o FIRST Championship 2026.',
-    href: 'https://www.sistemafibra.org.br/senai/40-noticias/destaques/1833-houston-chegamos-sesi-e-senai-df-competem-no-first-championship',
+    description: 'A equipe do Distrito Federal chegou ao mundial pelo segundo ano consecutivo e competiu na arena da FRC em Houston.',
+    image: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/05-maio/RobotsDistrict-no-First-Championship-2026-FotoDayanedosSantos-SistemaFibra-1.5.jpg',
+    fallback: 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2025/04_abril/16-04-FRC-Samira-Padua-Sistema-Fibra-1.jpg',
+    alt: 'Robot’s District em uma arena da FIRST Robotics Competition durante o FIRST Championship 2026 em Houston.',
+    href: 'https://www.sistemafibra.org.br/senai/institucional/historico/40-noticias/destaques/1836-alunos-do-sesi-e-do-senai-df-vivem-o-sonho-do-mundial-de-robotica',
   },
   {
     eyebrow: 'BRASÍLIA → CONQUISTA',
     title: 'FEDERAL FORCE • ROOKIE ALL-STAR 2025',
     description: 'No FIRST Championship 2025, a Federal Force conquistou o Rookie All-Star Award na divisão Arquimedes.',
     image: 'https://www.sistemafibra.org.br/sesi/images/categorias/noticias/2025/04_abril/interna-Foto-SamiraPadua-SistemaFibra1.jpg',
+    fallback: 'https://www.sistemafibra.org.br/senai/images/categorias/noticias/2026/02-fevereiro/23-1-2026_Equipes_FRC_-_Foto_Bruno_Frauzino-2816_Federal_Force.jpg',
     alt: 'Integrantes da Federal Force comemorando conquista no FIRST Championship 2025.',
     href: 'https://www.sistemafibra.org.br/sesi/institucional/imprensa/noticias/2217-equipe-do-df-e-premiada-no-first-championship-2025',
   },
@@ -129,7 +132,12 @@ export const FirstBrazilSesiSenai: React.FC = () => {
                   loading="lazy"
                   decoding="async"
                   fetchPriority="low"
-                  referrerPolicy="no-referrer"
+                  onError={(event) => {
+                    const image = event.currentTarget;
+                    if (image.dataset.fallbackApplied === 'true') return;
+                    image.dataset.fallbackApplied = 'true';
+                    image.src = story.fallback;
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/5" />
                 <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
