@@ -35,14 +35,39 @@
   }
 
   /* Keep anchored sections flush with the bottom of the fixed header.
-     The header is 62px tall while scrolled on mobile and 68px on desktop. */
+     The explicit nav targets use !important so local Tailwind scroll-mt
+     utilities cannot reintroduce a strip from the previous section. */
   section, [id] {
     scroll-margin-top: 62px;
+  }
+
+  #sobre,
+  #ligas,
+  #jornada,
+  #temporada,
+  #sesi-senai,
+  #comparativo,
+  #como-funciona,
+  #valores,
+  #experiencia {
+    scroll-margin-top: 62px !important;
   }
 
   @media (min-width: 640px) {
     section, [id] {
       scroll-margin-top: 68px;
+    }
+
+    #sobre,
+    #ligas,
+    #jornada,
+    #temporada,
+    #sesi-senai,
+    #comparativo,
+    #como-funciona,
+    #valores,
+    #experiencia {
+      scroll-margin-top: 68px !important;
     }
   }
 
